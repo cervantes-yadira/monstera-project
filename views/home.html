@@ -1,16 +1,26 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Monstera Home Page</title>
-</head>
+<include href="views/header.html"></include>
+
 <body>
-    <h1>Monstera Home Page</h1>
+    <include href="views/navbar.html"></include>
+    <div class="row p-4 bg-light">
+        <div class="col-7">
+            <div class="h3 border-bottom d-flex justify-content-center">Welcome to the Plant Tracker App</div>
+            <div class="fs-5">
+                <p>This application allows you to keep track of your plant watering schedule. Add plants to your
+                    plant library with photos and recieve reminders when your plants need watering.
+                </p>
+                <a href="" class="btn btn-secondary">Log-in</a>
+                <a href="" class="btn btn-secondary">Sign-up</a>
+            </div>
+            <div class="fs-5">
+                <p>Looking for more information on plants and their care needs? Search for plant info in our
+                    plant dictionary.
+                </p>
+                <a href="" class="btn btn-secondary">Dictionary</a>
+            </div>
+        </div>
+    </div>
 
-    <a href="contact">Contact Us</a>
-
+    <include href="views/footer.html"></include>
 </body>
 </html>
