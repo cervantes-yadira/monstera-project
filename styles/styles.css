@@ -1,11 +1,30 @@
 /* monstera-project/styles/styles.css */
 
+:root {
+    --dark-green-color: #7D8F69;
+    --tea-green-color: #DAE2B6;
+    --sage-green-color: #DFE8CC;
+    --beige: #F7EDDB;
+    --cream: #FFFBE9;
+}
+
 .form-container {
     width: 40%;
     margin: auto;
 }
 
 #intro {
-    width: 80%;
-    background-color: #F7EDDB;
+    background-color: var(--beige);
+}
+
+#nav {
+    background-color: var(--sage-green-color);
+}
+
+.button {
+    padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+    background-color: var(--dark-green-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
 }
