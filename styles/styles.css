@@ -14,6 +14,15 @@ This file contains the styles for the website and addresses responsiveness.
     --cream-color: #FFFBE9;
 }
 
+/* page (excluding footer) is at least 100% of viewport height */
+.page-content {
+    min-height: 100vh;
+}
+
+#nav {
+    background-color: var(--sage-green-color);
+}
+
 /* form container styles */
 .form-container {
     width: 40%;
@@ -26,10 +35,6 @@ This file contains the styles for the website and addresses responsiveness.
 
 #intro2 {
     background-color: var(--beige-color);
-}
-
-#nav {
-    background-color: var(--sage-green-color);
 }
 
 /* default button styles */
@@ -46,5 +51,12 @@ This file contains the styles for the website and addresses responsiveness.
 @media (max-width: 575.98px) {
     .form-container {
         width: 90%;
+    }
+}
+
+/* matches bootstraps md breakpoint */
+@media (max-width: 767.98px) {
+    .form-container {
+        width: 70%;
     }
 }
