@@ -1,10 +1,18 @@
-<!-- monstera-project/views/contact-form.html -->
+<!--
+Authors: Yadira Cervantes
+File: footer.html
 
+This file displays the footer and is included in each webpage.
+-->
+
+<!-- includes header.html -->
 <include href="views/header.html"></include>
 
 <body>
+    <!-- includes navbar.html -->
     <include href="views/navbar.html"></include>
 
+    <!-- contact form submits to itself -->
     <form action="#" method="post" class="form-container">
         <h3 class="mb-3">Contact Us</h3>
 
@@ -17,11 +25,13 @@
         <label for="message" class="form-label">Message:</label>
         <textarea id="message" name="message" rows="5" class="form-control mb-3"></textarea>
 
+        <!-- centers the submit button -->
         <div class="d-flex justify-content-center">
             <button type="submit" class="button">Send</button>
         </div>
     </form>
 
+    <!-- includes footer.html -->
     <include href="views/footer.html"></include>
 </body>
 </html>

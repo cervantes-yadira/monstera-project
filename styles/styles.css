@@ -1,13 +1,20 @@
-/* monstera-project/styles/styles.css */
+/*
+Authors: Yadira Cervantes, Jennifer McNiel, Luke Cheng
+File: styles.css
 
+This file contains the styles for the website and addresses responsiveness.
+*/
+
+/* color constants */
 :root {
     --dark-green-color: #7D8F69;
     --tea-green-color: #DAE2B6;
     --sage-green-color: #DFE8CC;
-    --beige: #F7EDDB;
-    --cream: #FFFBE9;
+    --beige-color: #F7EDDB;
+    --cream-color: #FFFBE9;
 }
 
+/* form container styles */
 .form-container {
     width: 40%;
     margin: auto;
@@ -18,18 +25,26 @@
 }
 
 #intro2 {
-    background-color: var(--beige);
+    background-color: var(--beige-color);
 }
 
 #nav {
     background-color: var(--sage-green-color);
 }
 
+/* default button styles */
 .button {
     padding: 0.5rem 0.9rem 0.5rem 0.9rem;
     background-color: var(--dark-green-color);
+    border-color: var(--dark-green-color);
     color: white;
     text-decoration: none;
     border-radius: 10px;
 }
 
+/* for mobile responsiveness, matches bootstraps sm breakpoint */
+@media (max-width: 575.98px) {
+    .form-container {
+        width: 90%;
+    }
+}

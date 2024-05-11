@@ -1,23 +1,29 @@
-<!-- monstera-project/views/navbar.html -->
-<nav id="nav" class="navbar navbar-expand-lg mb-5 p-3">
+<!--
+Authors: Yadira Cervantes
+File: navbar.html
+
+This file displays the navbar and is included in each webpage.
+-->
+<nav id="nav" class="navbar navbar-expand-md mb-4">
     <div class="container-fluid">
-        <div class="d-flex justify-content start">
-            <a href="{{ @BASE }}" class="navbar-brand">Plant Tracker</a>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="{{ @BASE }}" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Plant Dictionary</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Plant Library</a>
-                </li>
-                <li class="nav-item">
-                    <a href="contact" class="nav-link">Contact Us</a>
-                </li>
-            </ul>
+        <a href="{{ @BASE }}" class="navbar-brand">Plant Tracker</a>
+
+        <!-- toggles navbar dropdown -->
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav-items">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- collapses navbar when screen size is smaller than md breakpoint -->
+        <div class="collapse navbar-collapse" id="nav-items">
+            <div class="navbar-nav">
+                <a href="{{ @BASE }}" class="nav-item nav-link">Home</a>
+                <a href="#" class="nav-item nav-link">Plant Dictionary</a>
+                <a href="#" class="nav-item nav-link">Plant Library</a>
+                <a href="contact" class="nav-item nav-link">Contact Us</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <a href="#" class="button">Sign-out</a>
+            </div>
         </div>
-        <button type="button" class="btn btn-tertiary">Sign-out</button>
     </div>
 </nav>
