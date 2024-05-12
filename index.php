@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author Luke Cheng
+ * File: index.php
+ *
+ * This page sets up the Fat-Free Framework, includes error reporting configurations and rendering of views.
+ */
 
 //Turn on error reporting
 ini_set('display_errors', 1);
