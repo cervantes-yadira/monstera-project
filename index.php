@@ -28,6 +28,12 @@ $f3->route('GET|POST /contact', function($f3){
     echo $view->render('views/contact-form.html');
 });
 
+// Plant library
+$f3->route('GET /library', function(){
+    $view = new Template();
+    echo $view->render('views/plant-library.html');
+});
+
 
 //Run Fat-Free
 $f3->run();
