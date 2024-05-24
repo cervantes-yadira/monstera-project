@@ -34,6 +34,12 @@ $f3->route('GET /library', function(){
     echo $view->render('views/plant-library.html');
 });
 
+// Plant Dictionary
+$f3->route('GET /dictionary', function(){
+    $view = new Template();
+    echo $view->render('views/plant-dictionary.html');
+});
+
 
 //Run Fat-Free
 $f3->run();
