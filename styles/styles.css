@@ -60,3 +60,29 @@ This file contains the styles for the website and addresses responsiveness.
         width: 70%;
     }
 }
+
+#plantContainer, #rightPlantInfo{
+    display: flex;
+}
+
+#plantResult{
+    background-color: #DAE2B6;
+}
+
+#plantInfo{
+    background-color: #F7EDDB;
+}
+
+#plantSearchList{
+    text-decoration: none;
+    color: inherit;
+}
+
+#apiList :hover {
+    background-color: #F7EDDB;
+}
+
+#plantImage{
+    border: solid black 1px;
+    border-radius: 50%;
+}

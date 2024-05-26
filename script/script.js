@@ -17,7 +17,7 @@ async function searchPlant(query)
 {
     console.log('Search button clicked');
 
-    const apiKey = 'sk-jUyu66427049652865456';
+    const apiKey = 'sk-i0Hb663547d69f75c5335';
     const url = `https://perenual.com/api/species-list?key=${apiKey}&q=${query}`;
     try {
         const response = await fetch(url);
@@ -30,11 +30,23 @@ async function searchPlant(query)
 
 }
 
-//prints the plant info
+//prints the plant search result
 function displayResult(array)
 {
     console.log(array.data);
     let select = document.getElementById("apiList");
+
+    // Clear previous search results
+    select.innerHTML = '';
+
+    // Capitalize the first letter of each common_name
+    array.data.forEach(item => {
+        item.common_name = capitalizeFirstLetter(item.common_name.toLowerCase());
+    });
+
+    // Sort the array based on common_name in ascending order
+    array.data.sort((a, b) => a.common_name.localeCompare(b.common_name));
+
     for (let i = 0; i < array.data.length; i++) {
 
         let list = document.createElement("li");
@@ -43,6 +55,7 @@ function displayResult(array)
         href.textContent = array.data[i].common_name;
         href.href = "#";
         href.dataset.id = array.data[i].id;     //assign id as value using dataset so it can be retrived in the next method
+        href.id = "plantSearchList";            //add id attribute to the anchor tag
 
         //separate the function containing event listener
         href.addEventListener('click', loadPlantInfo);
@@ -53,6 +66,11 @@ function displayResult(array)
 
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+//prints plant info
 async function loadPlantInfo(event){
     event.preventDefault();
     console.log("Button clicked");
@@ -99,8 +117,8 @@ async function loadPlantInfo(event){
     let description = document.querySelector("#description");
     description.textContent = data.description;
 
-    // let images = document.querySelector("#default_image");
-    // images.textContent = data.default_image;
+    let images = document.querySelector("#plantImage");
+    images.src = data.default_image.original_url;
 
 
 }
