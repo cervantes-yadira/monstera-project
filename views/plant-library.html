@@ -8,19 +8,83 @@ This file displays plants a user has added to the tracker and notifications.
 <include href="views/header.html"></include>
 
 <body>
+<div class="page-content">
     <include href="views/navbar.html"></include>
 
-    <h3>Plant Library</h3>
+    <div class="library-container">
+        <h3>Plant Library</h3>
+        <p>
 
-    <table>
-        <thead>
+        </p>
 
-        </thead>
-        <tbody>
+        <div class="row">
+            <!-- user's plant table -->
+            <div class="col-8">
+                <table class="table-default">
+                    <thead>
+                    <tr id="table-header">
+                        <th>Name</th>
+                        <th>Plant</th>
+                        <th>Last Watered</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Monty</td>
+                        <td>Monstera</td>
+                        <td>7 days ago</td>
+                        <td>view/edit</td>
+                    </tr>
+                    <tr>
+                        <td>Spike</td>
+                        <td>Triangle Cactus</td>
+                        <td>5 days ago</td>
+                        <td>view/edit</td>
+                    </tr>
+                    <tr>
+                        <td>Cupid</td>
+                        <td>Bleeding Heart</td>
+                        <td>2 days ago</td>
+                        <td>view/edit</td>
+                    </tr>
+                    <tr>
+                        <td>Maple</td>
+                        <td>Japanese Maple</td>
+                        <td>2 days ago</td>
+                        <td>view/edit</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        </tbody>
-    </table>
+            <!-- reminders list -->
+            <div class="col-4">
+                <ul class="list-group list-unstyled notification-list">
+                    <li class="list-group-item">Reminders</li>
+                    <li class="list-group-item">
+                        <i class="fa-solid fa-bell"></i>
+                        Monty is overdue for watering
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fa-solid fa-bell"></i>
+                        Spike is due for watering
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fa-solid fa-bell"></i>
+                        Cupid is due for repotting
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-    <include href="views/footer.html"></include>
+        <!-- centers button under table -->
+        <div class="col-8 mt-4 d-flex justify-content-center">
+            <a href="#" class="button">Add a Plant</a>
+        </div>
+    </div>
+</div>
+
+<include href="views/footer.html"></include>
 </body>
 </html>
