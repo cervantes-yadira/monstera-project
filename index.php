@@ -11,15 +11,22 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once ('vendor/autoload.php');
+require_once ('models/validate.php');
+require_once ('classes/user.php');
+require_once ('classes/member.php');
+require_once ('controllers/controller.php');
+//var_dump(Validate3::validPassword('Abcd13457', 'Abcd13456'));
 
 $f3 = Base::instance();
+$con = new Controller3($f3);
 
 $f3->route('GET /', function(){
-//    echo '<h1>Hello Team Monstera</h1>';
+    $GLOBALS['con']->home();
+});
 
-    //Render a view page
-    $view = new Template();
-    echo $view->render('views/home.html');
+//Sign Up form
+$f3->route('GET|POST /sign-up', function(){
+    $GLOBALS['con']->signUp();
 });
 
 //Contact Us form

@@ -1,0 +1,60 @@
+<!--
+Authors: Jennifer McNiel
+File: sign-up.html
+
+This file is the route for /sign-up, displays the sign up page of our website and creates a new user in our DB.
+-->
+
+<include href="views/header.html"></include>
+
+<body>
+<include href="views/navbar.html"></include>
+
+<main>
+    <div class="container p-3" id="main-container">
+        <h3 class="form-header p-3 mb-0">Sign-up</h3>
+        <div class="form-container mb-5">
+            <div class="form-body">
+                <form  onsubmit="return validateForm()" method="POST" action="#" class="my-3">
+                    <div class="mb-3">
+                        <label for="input-user-name" class="form-label">Username*</label>
+                        <small id="name-error" class="warning ps-1">Username</small>
+                        <div class="row">
+                            <div class="col-sm">
+                                <input type="text" id="input-user-name" class="form-control" name="userName" placeholder="Username"
+                                       aria-label="Username" maxlength="30">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="input-email" class="form-label">Email*</label>
+                        <small id="email-error" class="warning ps-1">Please enter a valid email</small>
+                        <input type="email" class="form-control" id="input-email" name="email" placeholder="e.g. example@email.com" maxlength="60">
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="input-password" class="form-label">Password*</label>
+                            <input type="text" class="form-control" id="input-password" name="password" minlength="8" maxlength="16">
+                        </div>
+                        <div class="col">
+                            <label for="input-password-confirm" class="form-label">Re-enter Password*</label>
+                            <input type="text" class="form-control" id="input-password-confirm" name="password-confirm" minlength="8" maxlength="16">
+                        </div>
+                        <small id="password-error" class="warning">Please enter a valid password, between 8-16 characters, must include at least 1 number</small>
+                    </div>
+
+
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<include href="views/footer.html"></include>
+
+<script src="script/validate.js"></script>
+</body>
+</html>
