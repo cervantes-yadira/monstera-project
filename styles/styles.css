@@ -9,7 +9,7 @@ This file contains the styles for the website and addresses responsiveness.
 :root {
     --dark-green-color: #7D8F69;
     --tea-green-color: #DAE2B6;
-    --sage-green-color: #DFE8CC;
+    --sage-green-color: #e6eadc;
     --beige-color: #F7EDDB;
     --cream-color: #FFFBE9;
 }
@@ -85,4 +85,47 @@ This file contains the styles for the website and addresses responsiveness.
 #plantImage{
     border: solid black 1px;
     border-radius: 50%;
+}
+
+/* plant library styles */
+
+.library-container {
+    width: 90%;
+    margin: auto;
+}
+
+/* table styles */
+.table-default {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+#table-header {
+    background-color: var(--tea-green-color);
+}
+
+#table-header th {
+    padding: 10px;
+}
+
+.table-default tr {
+    background-color: #f2f4e7;
+}
+
+.table-default td {
+    padding: 10px;
+}
+
+/* list styles */
+.notification-list {
+    border: none !important;
+}
+
+.notification-list li:first-child {
+    font-weight: bold;
+}
+
+.notification-list li {
+    border: none !important;
 }
