@@ -1,5 +1,5 @@
 <!--
-Authors: Jennifer McNiel
+Authors: Jennifer McNiel, Yadira Cervantes
 File: sign-up.html
 
 This file is the route for /sign-up, displays the sign up page of our website and creates a new user in our DB.
@@ -15,10 +15,10 @@ This file is the route for /sign-up, displays the sign up page of our website an
         <h3 class="form-header p-3 mb-0">Sign-up</h3>
         <div class="form-container mb-5">
             <div class="form-body">
-                <form  onsubmit="return validateForm()" method="POST" action="#" class="my-3">
+                <form method="POST" action="#" class="my-3">
                     <div class="mb-3">
                         <label for="input-user-name" class="form-label">Username*</label>
-                        <small id="name-error" class="warning ps-1">Username</small>
+                        <small id="name-error" class="warning ps-1"></small>
                         <div class="row">
                             <div class="col-sm">
                                 <input type="text" id="input-user-name" class="form-control" name="userName" placeholder="Username"
@@ -29,7 +29,7 @@ This file is the route for /sign-up, displays the sign up page of our website an
 
                     <div class="mb-4">
                         <label for="input-email" class="form-label">Email*</label>
-                        <small id="email-error" class="warning ps-1">Please enter a valid email</small>
+                        <small id="email-error" class="warning ps-1"></small>
                         <input type="email" class="form-control" id="input-email" name="email" placeholder="e.g. example@email.com" maxlength="60">
                     </div>
 
@@ -42,7 +42,7 @@ This file is the route for /sign-up, displays the sign up page of our website an
                             <label for="input-password-confirm" class="form-label">Re-enter Password*</label>
                             <input type="text" class="form-control" id="input-password-confirm" name="password-confirm" minlength="8" maxlength="16">
                         </div>
-                        <small id="password-error" class="warning">Please enter a valid password, between 8-16 characters, must include at least 1 number</small>
+                        <small id="password-error" class="warning"></small>
                     </div>
 
 
