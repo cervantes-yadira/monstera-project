@@ -1,82 +1,70 @@
+/**
+ * Authors: Yadira Cervantes
+ * File: validate.js
+ *
+ * This file uses jQuery to asynchronously call the validation methods in
+ * validate.php and display corresponding form errors.
+ */
 
-const userName = document.getElementById("input-user-name");
-const email = document.getElementById("input-email");
-const password = document.getElementById("input-password");
-const passwordConfirm = document.getElementById("input-password-confirm");
+// loads jQuery
+$(document).ready(function() {
+    // DOM elements
+    let username = $("#input-user-name");
+    let email = $("#input-email");
+    let password = $("#input-password");
+    let passwordConfirm = $("#input-password-confirm");
 
+    // executes when mouse clicks out of username input
+    username.focusout(function () {
+        $.post("models/validateAsync.php",
+            {
+                // post array values
+                username: username.val(),
+            },
+            function(response){
+                // error message set to php response
+                $("#name-error").text(response);
 
-// validation
+            },
+            "text");
+    })
 
-function validateForm() {
-    let isUserNameValid = validateUserName();
-    let isEmailValid = validateEmail();
-    let isPasswordValid =  validatePassword();
+    // executes when mouse clicks out of email input
+    email.focusout(function () {
+        $.post("models/validateAsync.php",
+            {
+                // post array values
+                email: email.val(),
+            },
+            function(response){
+                // error message set to php response
+                $("#email-error").text(response);
+            },
+            "text");
+    })
 
-    let isValid = isUserNameValid && isEmailValid && isPasswordValid;
+    // executes when mouse clicks out of password input
+    password.focusout(function () {
+        validatePassword();
+    })
 
-    if(isValid === false) {
+    // executes when mouse clicks out of confirmation password input
+    passwordConfirm.focusout(function () {
+        validatePassword();
+    })
 
-        window.scroll({
-            top: 70,
-            left: 100,
-            behavior: "smooth",
-        });
+    // uses validPassword() method in php
+    function validatePassword() {
+        $.post("models/validateAsync.php",
+            {
+                // post array values
+                password: password.val(),
+                passwordConfirm: passwordConfirm.val(),
+            },
+            function(response){
+                // error message set to php response
+                $("#password-error").text(response);
+            },
+            "text");
     }
-
-    return isValid;
-}
-
-function validateUserName() {
-    let isUserValid = userName.value.length !== 0;
-
-    const nameError = document.getElementById("name-error");
-    const nameMessage = "Please enter user name";
-
-    if (isUserValid === true) {
-        nameError.style.visibility = "hidden";
-        userName.classList.remove("form-input-error");
-    } else {
-        if (isUserValid === false) {
-            nameError.innerText = nameMessage;
-            userName.classList.add("form-input-error");
-        }
-        nameError.style.visibility = "visible";
-    }
-    return isUserValid;
-}
-
-function validateEmail() {
-    let re = /[^\s@]+@[^\s@]+\.[^\s@]+/;
-    let isValid = re.test(email.value);
-
-    const emailError = document.getElementById("email-error");
-
-    if(isValid === true) {
-        emailError.style.visibility = "hidden";
-        email.setAttribute("class", "form-control");
-    } else {
-        emailError.style.visibility = "visible";
-        email.setAttribute("class", "form-control form-input-error");
-    }
-
-    return isValid;
-}
-
-function validatePassword() {
-    let re = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d!@#$%&*_\-.]{8,16}$/;
-    let isValid = re.test(password.value) && (password.value === passwordConfirm.value);
-    const passwordError = document.getElementById("password-error");
-
-    if(isValid === false) {
-        passwordError.style.visibility = "visible";
-        password.classList.add('form-input-error');
-        passwordConfirm.classList.add('form-input-error');
-    } else {
-        passwordError.style.visibility = "hidden";
-        password.classList.remove('form-input-error');
-        passwordConfirm.classList.remove('form-input-error');
-    }
-
-    return isValid;
-}
-
+});
