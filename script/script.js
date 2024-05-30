@@ -108,8 +108,8 @@ async function loadPlantInfo(event){
     let sunlight = document.querySelector("#sunlight");
     sunlight.textContent = data.sunlight;
 
-    let pruningMonth = document.querySelector("#pruning_month");
-    pruningMonth.textContent = data.pruning_month;
+    let wateringPeriod = document.querySelector("#watering_period");
+    wateringPeriod.textContent = data.watering_period;
 
     // let careGuides = document.querySelector("#care-guides");
     // careGuides.textContent = data.care-guides;
@@ -118,7 +118,7 @@ async function loadPlantInfo(event){
     description.textContent = data.description;
 
     let images = document.querySelector("#plantImage");
-    images.src = data.default_image.original_url;
+    images.src = data.default_image.thumbnail;
 
 
 }
