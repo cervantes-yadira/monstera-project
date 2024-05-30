@@ -133,3 +133,27 @@ This file contains the styles for the website and addresses responsiveness.
 .notification-list li {
     border: none !important;
 }
+
+/* view plant styles */
+.view-plant-container {
+    width: 80%;
+    margin: auto;
+}
+
+.gallery {
+    border: solid 2px var(--tea-green-color);
+}
+
+.gallery-header {
+    border-bottom: solid 2px var(--tea-green-color);
+}
+
+.gallery-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.view-plant-table tr, td {
+    border-style: none !important;
+}
