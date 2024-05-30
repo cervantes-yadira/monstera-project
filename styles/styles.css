@@ -15,8 +15,15 @@ This file contains the styles for the website and addresses responsiveness.
 }
 
 /* page (excluding footer) is at least 100% of viewport height */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Make sure the body takes up at least the full height of the viewport */
+    margin: 0;
+}
+
 .page-content {
-    min-height: 100vh;
+    flex: 1;
 }
 
 #nav {
