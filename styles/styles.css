@@ -20,7 +20,12 @@ This file contains the styles for the website and addresses responsiveness.
 }
 
 #nav {
+    position: sticky;
+    top: 0;
+    margin-bottom: 4rem;
+    width: 100%;
     background-color: var(--sage-green-color);
+    box-shadow: 0 3px 7px #b9b9b9;
 }
 
 /* form container styles */
