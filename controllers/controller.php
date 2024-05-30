@@ -95,6 +95,28 @@ class Controller3
     }
 
     /**
+     * Renders the plant dictionary view template.
+     *
+     * @return void
+     */
+    function plantDictionary()
+    {
+        $view = new Template();
+        echo $view->render('views/plant-dictionary.html');
+    }
+
+    /**
+     * Renders the plant library view template.
+     *
+     * @return void
+     */
+    function plantLibrary()
+    {
+        $view = new Template();
+        echo $view->render('views/plant-library.html');
+    }
+
+    /**
      * Renders the add plant view template.
      *
      * @return void
@@ -103,5 +125,16 @@ class Controller3
     {
         $view = new Template();
         echo $view->render('views/view-plant.html');
+    }
+
+    /**
+     * Renders the contact us view template.
+     *
+     * @return void
+     */
+    function contactUs()
+    {
+        $view = new Template();
+        echo $view->render('views/contact-form.html');
     }
 }

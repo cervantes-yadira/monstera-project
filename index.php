@@ -20,38 +20,46 @@ require_once ('controllers/controller.php');
 $f3 = Base::instance();
 $con = new Controller3($f3);
 
-$f3->route('GET /', function(){
+$f3->route('GET /', function()
+{
     $GLOBALS['con']->home();
 });
 
 //Sign Up form
-$f3->route('GET|POST /sign-up', function(){
+$f3->route('GET|POST /sign-up', function()
+{
     $GLOBALS['con']->signUp();
 });
 
 //Sign In form
-$f3->route('GET|POST /sign-in', function(){
+$f3->route('GET|POST /sign-in', function()
+{
     $GLOBALS['con']->signIn();
 });
 
 //Contact Us form
-$f3->route('GET|POST /contact', function($f3){
-    $view = new Template();
-    echo $view->render('views/contact-form.html');
+$f3->route('GET|POST /contact', function()
+{
+    $GLOBALS['con']->contactUs();
 });
 
 // Plant library
-$f3->route('GET /library', function(){
-    $view = new Template();
-    echo $view->render('views/plant-library.html');
+$f3->route('GET /library', function()
+{
+    $GLOBALS['con']->plantLibrary();
+});
+
+// View Plant
+$f3->route('GET /view', function()
+{
+    $GLOBALS['con']->viewPlant();
 });
 
 // Plant Dictionary
-$f3->route('GET /dictionary', function(){
-    $view = new Template();
-    echo $view->render('views/plant-dictionary.html');
+$f3->route('GET /dictionary', function()
+{
+    $GLOBALS['con']->plantDictionary();
 });
-
 
 //Run Fat-Free
 $f3->run();
