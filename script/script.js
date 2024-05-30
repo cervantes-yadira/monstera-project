@@ -108,8 +108,8 @@ async function loadPlantInfo(event){
     let sunlight = document.querySelector("#sunlight");
     sunlight.textContent = data.sunlight;
 
-    let wateringPeriod = document.querySelector("#watering_period");
-    wateringPeriod.textContent = data.watering_period;
+    // let pruningMonth = document.querySelector("#pruning_month");
+    // pruningMonth.textContent = data.pruning_month;
 
     // let careGuides = document.querySelector("#care-guides");
     // careGuides.textContent = data.care-guides;
