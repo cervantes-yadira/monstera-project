@@ -4,6 +4,14 @@
  * Controller class for application project
  */
 
+/**
+ * Renders the templates for the application's views.
+ *
+ * @author Luke Cheng
+ * @author Jennifer McNiel
+ * @author Yadira Cervantes
+ * @version 1.0
+ */
 class Controller3
 {
     private $_f3;
@@ -14,7 +22,7 @@ class Controller3
     }
 
     /**
-     * renders the home view template
+     * Renders the home view template.
      * @return void
      */
     function home(): void
@@ -24,7 +32,8 @@ class Controller3
     }
 
     /**
-     * renders the user Sign Up view template
+     * Renders the user sign-up view template.
+     *
      * @return void
      */
     function signUp(): void
@@ -74,9 +83,25 @@ class Controller3
         echo $view->render('views/sign-up.html');
     }
 
+    /**
+     * Renders the user sign-in view template.
+     *
+     * @return void
+     */
     function signIn(): void
     {
         $view = new Template();
         echo $view->render('views/sign-in.html');
+    }
+
+    /**
+     * Renders the add plant view template.
+     *
+     * @return void
+     */
+    function viewPlant(): void
+    {
+        $view = new Template();
+        echo $view->render('views/view-plant.html');
     }
 }
