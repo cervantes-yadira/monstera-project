@@ -37,6 +37,10 @@ This file contains the styles for the website and addresses responsiveness.
     background-color: var(--beige-color);
 }
 
+#signup-form, #signin-form {
+    background-color: var(--tea-green-color);
+}
+
 /* default button styles */
 .button {
     padding: 0.5rem 0.9rem 0.5rem 0.9rem;

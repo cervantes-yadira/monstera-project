@@ -29,6 +29,11 @@ $f3->route('GET|POST /sign-up', function(){
     $GLOBALS['con']->signUp();
 });
 
+//Sign In form
+$f3->route('GET|POST /sign-in', function(){
+    $GLOBALS['con']->signIn();
+});
+
 //Contact Us form
 $f3->route('GET|POST /contact', function($f3){
     $view = new Template();

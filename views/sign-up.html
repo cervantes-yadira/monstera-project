@@ -13,9 +13,9 @@ This file is the route for /sign-up, displays the sign up page of our website an
 <main class="page-content">
     <div class="container p-3" id="main-container">
         <h3 class="form-header p-3 mb-0">Sign-up</h3>
-        <div class="form-container mb-5">
+        <div id="signup-form" class="form-container mb-5 p-3">
             <div class="form-body">
-                <form method="POST" action="#" class="my-3">
+                <form method="POST" action="#" class="my-3 ">
                     <div class="mb-3">
                         <label for="input-user-name" class="form-label">Username*</label>
                         <small id="name-error" class="warning ps-1"></small>
@@ -45,8 +45,10 @@ This file is the route for /sign-up, displays the sign up page of our website an
                         <small id="password-error" class="warning"></small>
                     </div>
 
+                    <div class="row p-3">
+                        <button type="submit" class="button submit-btn">Submit</button>
+                    </div>
 
-                    <button type="submit" class="submit-btn">Submit</button>
                 </form>
             </div>
         </div>
