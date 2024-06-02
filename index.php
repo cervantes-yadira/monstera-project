@@ -11,14 +11,25 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once ('vendor/autoload.php');
-require_once ('models/validate.php');
-require_once ('classes/user.php');
-require_once ('classes/member.php');
-require_once ('controllers/controller.php');
+require_once $_SERVER['DOCUMENT_ROOT'].'/../config.php';
+//require_once ('models/validate.php');
+//require_once ('classes/user.php');
+//require_once ('classes/member.php');
+//require_once ('controllers/controller.php');
 //var_dump(Validate3::validPassword('Abcd13457', 'Abcd13456'));
 
 $f3 = Base::instance();
 $con = new Controller3($f3);
+
+//set up database connection object
+try {
+    $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+    echo 'Connected to database!!';
+    var_dump($dbh);
+}
+catch (PDOException $e) {
+    die ($e->getMessage());
+}
 
 $f3->route('GET /', function()
 {
@@ -26,9 +37,9 @@ $f3->route('GET /', function()
 });
 
 //Sign Up form
-$f3->route('GET|POST /sign-up', function()
+$f3->route('GET|POST /sign-up', function($dbh)
 {
-    $GLOBALS['con']->signUp();
+    $GLOBALS['con']->signUp($dbh);
 });
 
 //Sign In form

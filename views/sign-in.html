@@ -16,9 +16,12 @@ This file is the route for /sign-in, displays the sign in page of our website, v
             <div class='form-body'>
                 <form id='login-form' class='p-3 p-md-4 p-lg-5' method='POST' action='#'>
                     <div class='mb-4'>
-                        <label for='input-email' class='form-label'>Email*</label>
-                        <input type='email' class='form-control' id='input-email' name='email'
-                               autocomplete='username' placeholder='e.g. example@email.com' required>
+                        <check if="{{ isset(@errors['logIn']) }}">
+                            <p class="text-danger fw-lighter">{{ @errors['logIn'] }}</p>
+                        </check>
+                        <label for='input-username' class='form-label'>Username*</label>
+                        <input type='text' class='form-control' id='input-username' name='username'
+                               autocomplete='username' required>
                     </div>
                     <div class='mb-4'>
                         <label for='input-password' class='form-label'>Password*</label>
