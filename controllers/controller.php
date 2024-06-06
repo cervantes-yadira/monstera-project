@@ -64,7 +64,7 @@ class Controller3
             }
             if(Validate3::validPassword($_POST['password'])){
                 if(Validate3::passwordMatch($_POST['password'], $_POST['password-confirm'])){
-                    $password = $_POST['userName'];
+                    $password = $_POST['password'];
                     // hash the valid password
                     $hashPass = password_hash($password, PASSWORD_DEFAULT);
 
@@ -105,32 +105,32 @@ class Controller3
      */
     function signIn(): void
     {
-        //        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-//            $userName = $_POST['username'];
-//            $plainTextPass = $_POST['password'];
-//            $sqlUserPass = "SELECT `userName`, `Email`, Password  FROM PlantUsers WHERE `UserName`='$userName'
-//                                                                     AND `PlantUsers`.is_deleted = 0 ";
-//            $result = mysqli_query($cnxn, $sqlUserPass);  //TODO Update method of querying DB
-//
-//            if (mysqli_num_rows($result) === 1) {
-//                $row = mysqli_fetch_assoc($result);
-//                $retrievedHashPass = $row['password'];
-//                $verifyPass = password_verify($plainTextPass, $retrievedHashPass);
-//
-//                if ((strtolower($row['userName']) === strtolower($userName)) && $verifyPass) {
-//
-//                    $user = new Member($userName, $row['Email']);
-//
-//                    $this->_f3->set('SESSION.user', $user);
-//
-//                    $this->_f3->reroute('/');
-//                } else {
-//                    $this->_f3->set('errors["logIn"]', "Incorrect username or password, please try again.");
-//                }
-//            } else {
-//                $this->_f3->set('errors["logIn"]', "Incorrect username or password, please try again.");
-//            }
-//        }
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $userName = $_POST['username'];
+            $plainTextPass = $_POST['password'];
+
+            $resultUser = $GLOBALS['dataLayer']->getUser($userName);
+
+            if ($resultUser != 0) {
+
+                $retrievedHashPass = $resultUser['Password'];
+
+                $verifyPass = password_verify($plainTextPass, $retrievedHashPass);
+
+                if ((strtolower($resultUser['UserName']) === strtolower($userName)) && $verifyPass && $resultUser['isDeleted'] != 1) {
+
+                    $user = new Member($userName, $resultUser['Email'], $retrievedHashPass);
+
+                    $this->_f3->set('SESSION.user', $user);
+
+                    $this->_f3->reroute('/library');
+                } else {
+                    $this->_f3->set('errors["logIn"]', "Incorrect username or password, please try again.");
+                }
+            } else {
+                $this->_f3->set('errors["logIn"]', "Incorrect username or password, please try again.");
+            }
+        }
 
         $view = new Template();
         echo $view->render('views/sign-in.html');

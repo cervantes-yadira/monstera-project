@@ -30,7 +30,6 @@ class DataLayer3
         $sql = "SELECT * FROM PlantUsers WHERE userName = :sqlUserName";
 
         //2 prepare statement
-//            var_dump($dbh);
         $statement = $this->_dbh->prepare($sql);
 
         //3 bind parameters
