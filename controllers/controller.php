@@ -45,7 +45,15 @@ class Controller3
         if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
             if(Validate3::validUserName($_POST['userName'])){
-                $userName = $_POST['userName'];
+                //if is valid userName then check if in use
+                $resultCheckUser = $GLOBALS['dataLayer']->getUser($_POST['userName']);
+                var_dump($resultCheckUser);
+
+                if(($resultCheckUser) == 0) {
+                    $userName = $_POST['userName'];
+                }else {
+                    $this->_f3->set('errors["userName"]', "User name not available");
+                }
             } else {
                 $this->_f3->set('errors["userName"]', "Please enter a valid user name");
             }
@@ -54,58 +62,32 @@ class Controller3
             } else {
                 $this->_f3->set('errors["email"]', "Please enter a valid email");
             }
-            if(Validate3::validPassword($_POST['password'], $_POST['password-confirm'])){
-                $password = $_POST['userName'];
-                // hash the valid password
-                $hashPass = password_hash($password, PASSWORD_DEFAULT);
+            if(Validate3::validPassword($_POST['password'])){
+                if(Validate3::passwordMatch($_POST['password'], $_POST['password-confirm'])){
+                    $password = $_POST['userName'];
+                    // hash the valid password
+                    $hashPass = password_hash($password, PASSWORD_DEFAULT);
 
+                } else {
+                    $this->_f3->set('errors["password"]', "Passwords must match");
+                }
             } else {
                 $this->_f3->set('errors["password"]', "Please enter a valid password, between 8-16 characters, must 
                 include at least 1 number");
             }
-            // TODO Validate that email and username is not in use maybe encapsulate inside validation class?
-            //1 define
-            $sql = "SELECT * FROM PlantUsers WHERE userName = :sqlUserName";
-
-            //2 prepare statement
-//            var_dump($dbh);
-            $statement = $dbh->prepare($sql);
-
-            //3 bind parameters
-            $statement->bindParam(':sqlUserName', $userName);
-
-            //4 execute query
-            $statement->execute();
-
-            //5 (optional) process the results
-            $resultCheckEmail = $statement->fetch(PDO::FETCH_ASSOC);
-
-            if(mysqli_num_rows($resultCheckEmail) != 0) {
-                $this->_f3->set('errors["userName"]', "User name not available");
-            }
-
 
 
             // check no errors
             if (empty($this->_f3->get('errors'))){
                 $user = new Member($userName, $email, $hashPass);
+                var_dump($user);
 
                 $this->_f3->set('SESSION.user', $user);
 
-                //TODO send new user info to database
-                //1 define the query
-                $sql = 'INSERT INTO PlantUsers (UserName, Password, Email) VALUES (:name, :pass, :email)';
-
-                // 2 Prepare the statement
-                $statement = $dbh->prepare($sql);
-
-                //3 bind the parameters
-                $statement->bindParam(':name', $userName);
-                $statement->bindParam(':pass', $hashPass);
-                $statement->bindParam(':email', $email);
-
-                //4 execute the query
-                $statement->execute();
+                // send new user info to database
+                $id = $GLOBALS['dataLayer']->addUser($user);
+                $this->_f3->set('ID', $id);
+                echo "User $id inserted successfully"; // delete after testing
 
                 $this->_f3->reroute('/');
             }

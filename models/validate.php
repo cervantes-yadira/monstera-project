@@ -31,14 +31,20 @@ class Validate3
             return true;
     }
 
-    static function validPassword(string $password, string $passwordConfirm)
+    static function validPassword(string $password)
     {
         $pattern = '/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d!@#$%&*_\-.]{8,16}$/';
 
         if (preg_match($pattern, $password)) {
-            if ($password == $passwordConfirm){
-                return true;
-            }
+            return true;
+        }
+        return false;
+    }
+
+    static function passwordMatch(string $password, string $passwordConfirm)
+    {
+        if ($password == $passwordConfirm){
+            return true;
         }
         return false;
     }

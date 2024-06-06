@@ -20,16 +20,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/../config.php';
 
 $f3 = Base::instance();
 $con = new Controller3($f3);
+$dataLayer = new DataLayer3();
 
-//set up database connection object
-try {
-    $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-    echo 'Connected to database!!';
-    var_dump($dbh);
-}
-catch (PDOException $e) {
-    die ($e->getMessage());
-}
+
 
 $f3->route('GET /', function()
 {
