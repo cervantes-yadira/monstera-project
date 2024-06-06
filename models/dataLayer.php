@@ -64,4 +64,8 @@ class DataLayer3
         //5 (optional) process the results
         return $this->_dbh->lastInsertId();
     }
+
+    //TODO create addPlant()
+
+    //TODO create addImage()
 }

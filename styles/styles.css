@@ -49,7 +49,7 @@ body {
     background-color: var(--beige-color);
 }
 
-#signup-form, #signin-form {
+#signup-form, #signin-form, #add-plant-form {
     background-color: var(--tea-green-color);
 }
 

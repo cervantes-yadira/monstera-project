@@ -1,0 +1,95 @@
+<!--
+Authors: Jennifer McNiel
+File: add-plant.html
+
+This file displays the form for adding a new plant to a user's plant library.
+-->
+
+<include href="views/header.html"></include>
+
+<body>
+<div class="page-content">
+    <include href="views/navbar.html"></include>
+
+    <div class="view-plant-container">
+        <div class='h3 d-flex justify-content-center'>Add New Plant</div>
+
+        <!-- plant info -->
+        <div class="fs-5">
+            <form action="#" method="POST" enctype="multipart/form-data" class="row g-3 p-3 m-3" id="add-plant-form">
+                <div class="">
+                    <div class="row p-3">
+                        <!--get plant name-->
+                        <div class="form-group">
+                            <label for="plantName" class="control-label">Plant Name</label>
+                            <input class="form-control" type="text" name="plantName" id="plantName">
+                            <check if="{{ isset(@errors['plantName']) }}">
+                                <p class="text-danger fw-lighter">{{ @errors['plantName'] }}</p>
+                            </check>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <!--get species name-->
+                        <div class="form-group">
+                            <label for="speciesName" class="control-label">Species Name</label>
+                            <input class="form-control" type="text" name="speciesName" id="speciesName">
+                            <check if="{{ isset(@errors['speciesName']) }}">
+                                <p class="text-danger fw-lighter">{{ @errors['speciesName'] }}</p>
+                            </check>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <!--get watering period-->
+                        <div class="form-group ">
+                            <label for="waterPeriod" class="control-label">Watering Period</label>
+                            <input class="form-control" type="number" name="waterPeriod" id="waterPeriod">
+                            <check if="{{ isset(@errors['waterPeriod']) }}">
+                                <p class="text-danger fw-lighter">{{ @errors['waterPeriod'] }}</p>
+                            </check>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <!--get last watered date-->
+                        <div class="form-group ">
+                            <label for="lastWatered" class="control-label">Date Last Watered</label>
+                            <input class="form-control" type="date" name="lastWatered" id="lastWatered">
+                            <check if="{{ isset(@errors['lastWatered']) }}">
+                                <p class="text-danger fw-lighter">{{ @errors['lastWatered'] }}</p>
+                            </check>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <!--get adoption date-->
+                        <div class="form-group ">
+                            <label for="adoptionDate" class="control-label">Adoption Date</label>
+                            <input class="form-control" type="date" name="adoptionDate" id="adoptionDate">
+                            <check if="{{ isset(@errors['adoptionDate']) }}">
+                                <p class="text-danger fw-lighter">{{ @errors['adoptionDate'] }}</p>
+                            </check>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <!--get file upload-->
+                        <div class="form-group ">
+                            <label for="uploadFile" class="control-label">Add Picture:</label>
+                            <input id="max_id" type="hidden" name="MAX_FILE_SIZE" value="1000001" >
+                            <input type="file" name="uploadFile" id="uploadFile">
+                            <check if="{{ isset(@errors['file']) }}">
+                                <p class="err">{{ @errors['file'] }}</p>
+                            </check>
+                        </div>
+                    </div>
+                </div>
+                <!-- submit button -->
+                <div class="p-3">
+                    <button type="submit" class="button submit-btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<include href="views/footer.html"></include>
+</body>
+</html>
