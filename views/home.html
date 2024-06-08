@@ -1,5 +1,5 @@
 <!--
-Authors: Jennifer McNiel
+Authors: Jennifer McNiel, Yadira Cervantes
 File: home.html
 
 This file is the default route, displays the home page of our website and explains our application.
@@ -9,31 +9,50 @@ This file is the default route, displays the home page of our website and explai
 
 <body>
     <include href="views/navbar.html"></include>
-    <div class="page-content row p-4">
-        <div class="col-8">
-            <div class="h3 border-bottom d-flex justify-content-center">Welcome to the Plant Tracker App</div>
-            <div id="intro" class="fs-5 p-3 m-3">
-                <p>This application allows you to keep track of your plant watering schedule. Add plants to your
-                    plant library with photos and receive reminders when your plants need watering.
-                </p>
-                <div class="d-flex justify-content-center p-3">
-                    <a href="sign-in" class="button p-3 m-3">Log-in</a>
-                    <a href="sign-up" class="button p-3 m-3">Sign-up</a>
-                </div>
-            </div>
-            <div id="intro2" class="fs-5 p-3 m-3">
-                <p>Looking for more information on plants and their care needs? Search for plant info in our
-                    plant dictionary.
-                </p>
-                <div class="d-flex justify-content-center p-3">
-                    <a href="dictionary" class="button">Dictionary</a>
-                </div>
+    <div class="page-content">
+        <div class="home-top-row mb-4">
+            <h2 class="text-center"><span class="font-important">Monstera</span>: Take control of your plant's needs</h2>
+            <h5 class="text-center font-light">Monstera plant tracking app helps you remember your plant's watering schedule and upkeep.</h5>
+            <div class="d-flex justify-content-center mt-4">
+                <a href="sign-up" class="button">Get Started</a>
             </div>
         </div>
-        <div class="image-container col-4">
-            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnRmamZmc3ViNGJod2FxNmY1Ymw5NDhnNTB2ZjNoamVua
-            TA2NDkwOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hsfq8IANeoSIogFoEx/giphy.gif" width="100%"
-                 alt="Description of the GIF">
+
+        <div class="row d-flex justify-content-center">
+            <img id="plant-image-home" src="images/plant-home.png" alt="Illustration of plants">
+        </div>
+
+        <div class="row home-row my-5">
+            <div class="col">
+                <h5 class="font-bold">Add Plants to your Library</h5>
+                <p>Add your plants to start tracking their needs.</p>
+            </div>
+            <div class="col">
+                <h5 class="font-bold">Receive Reminders</h5>
+                <p>Check your reminders list for plant upkeep notifications.</p>
+            </div>
+            <div class="col">
+                <h5 class="font-bold">View your Plants</h5>
+                <p>Review your plant's information and photos.</p>
+            </div>
+            <div class="col">
+                <h5 class="font-bold">Browse our Dictionary</h5>
+                <p>Look through our detailed dictionary of over 3,000 plants.</p>
+            </div>
+        </div>
+
+        <div id="home1">
+            <div class="row home-row">
+                <h5 class="font-bold">About Us</h5>
+                <p>
+                    Monstera is dedicated to provide plant enthusiasts with the tools necessary
+                    to nurture and watch their plants grow.
+                </p>
+                <p>
+                    Our website provides a comprehensive dictionary of plants which can be used to
+                    better understand your plant's needs.
+                </p>
+            </div>
         </div>
     </div>
 

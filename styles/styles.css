@@ -35,18 +35,50 @@ body {
     box-shadow: 0 3px 7px #b9b9b9;
 }
 
+/* font styles */
+
+.font-important {
+    color: var(--dark-green-color);
+    font-weight: 600;
+}
+
+.font-light {
+    color: #50524d;
+}
+
+.font-bold {
+    font-weight: 520;
+}
+
+.font-light {
+    font-weight: 50;
+}
+
+/* homepage styles */
+.home-top-row {
+    margin-top: 4rem;
+}
+
+.home-row {
+    width: 85%;
+    margin: auto;
+}
+
+#plant-image-home {
+    max-height: 15rem;
+    width: auto;
+}
+
+#home1 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #e9eed4;
+}
+
 /* form container styles */
 .form-container {
     width: 40%;
     margin: auto;
-}
-
-#intro {
-    background-color: var(--sage-green-color);
-}
-
-#intro2 {
-    background-color: var(--beige-color);
 }
 
 #signup-form, #signin-form, #add-plant-form {

@@ -1,8 +1,12 @@
 <?php
 
+require_once ('../models/dataLayer.php');
+
 /**
  * Validate data for the monstera project app
- * Jennifer McNiel 5/27/2024
+ * 5/27/2024
+ * @author Jennifer McNiel
+ * @author Yadira Cervantes
  */
 class Validate3
 {
@@ -15,6 +19,23 @@ class Validate3
     static function validUserName(string $userName): bool
     {
         return !empty($userName);
+    }
+
+    /**
+     * checks the database for a given username
+     * @param $username string name of user
+     * @return bool true if username is available, false otherwise
+     */
+    static function validAvailableUserName(string $username): bool
+    {
+        $dataLayer = new DataLayer3();
+        $isTaken = $dataLayer->getUser($username);
+
+        if(!$isTaken) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -86,5 +107,4 @@ class Validate3
 
         return $uploadOk;
     }
-
 }
