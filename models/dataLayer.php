@@ -65,7 +65,37 @@ class DataLayer3
         return $this->_dbh->lastInsertId();
     }
 
-    //TODO create addPlant()
+
+    function addPlant($plant)
+    {
+        //1 define the query
+        $sql = 'INSERT INTO Plants (UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered) 
+                VALUES (:userId, :name, :species, :adopt, :waterPeriod, :LastWater)';
+
+        // 2 Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3 bind the parameters
+        $userId = $plant->getMemberId();
+        $plantName = $plant->getPlantName();
+        $species = $plant->getSpeciesName();
+        $adoptDate = $plant->getAdoptDate();
+        $waterPeriod = $plant->getWaterPeriod();
+        $waterDate = $plant->getWaterDate();
+        $statement->bindParam(':userId', $userId);
+        $statement->bindParam(':name', $plantName);
+        $statement->bindParam(':species', $species);
+        $statement->bindParam(':adopt', $adoptDate);
+        $statement->bindParam(':waterPeriod', $waterPeriod);
+        $statement->bindParam(':lastWater', $waterDate);
+
+        //4 execute the query
+        $statement->execute();
+
+        //5 (optional) process the results
+        return $this->_dbh->lastInsertId();
+    }
+
 
     //TODO create addImage()
 }

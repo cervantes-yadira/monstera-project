@@ -222,9 +222,14 @@ class Controller3
                 echo "Plant $id inserted successfully"; // delete after testing
 
                 // add new image to PlantPics table  TODO create an Image class??
-                $id = $GLOBALS['dataLayer']->addImage($plant);
-                // $this->_f3->set('ID', $id); // I don't think this is necessary?
-                echo "Image $id inserted successfully"; // delete after testing
+                if ($imagePath != ''){
+                    $plantImage = new PlantImage('', $plant->getPlantId(), $imagePath);
+
+                    $id = $GLOBALS['dataLayer']->addImage($plantImage);
+                    $plantImage->setImageId($id);
+                    echo "Image $id inserted successfully"; // delete after testing
+                }
+
 
             }
 
