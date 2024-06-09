@@ -70,7 +70,7 @@ class DataLayer3
     {
         //1 define the query
         $sql = 'INSERT INTO Plants (UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered) 
-                VALUES (:userId, :name, :species, :adopt, :waterPeriod, :LastWater)';
+                VALUES (:userId, :name, :species, :adopt, :waterPeriod, :lastWater)';
 
         // 2 Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -97,5 +97,26 @@ class DataLayer3
     }
 
 
-    //TODO create addImage()
+    function addImage($image)
+    {
+        //1 define the query
+        $sql = 'INSERT INTO PlantPics (PlantId, Url) VALUES (:plantId, :path)';
+
+        // 2 Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3 bind the parameters
+        $plantId = $image->getPlantId();
+        $imagePath = $image->getPath();
+
+        $statement->bindParam(':plantId', $plantId);
+        $statement->bindParam(':path', $imagePath);
+
+        //4 execute the query
+        $statement->execute();
+
+        //5 (optional) process the results
+        return $this->_dbh->lastInsertId();
+    }
+
 }

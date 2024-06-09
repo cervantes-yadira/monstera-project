@@ -1,6 +1,6 @@
 <?php
 
-require_once ('../models/dataLayer.php');
+require_once ('dataLayer.php');
 
 /**
  * Validate data for the monstera project app
@@ -95,7 +95,7 @@ class Validate3
             $uploadOk = false;
         }
 
-        if ($fileData["size"] > 1000000){
+        if ($fileData["size"] > 10000000){
             echo "Sorry, your file is too large.";
             $uploadOk = false;
         }

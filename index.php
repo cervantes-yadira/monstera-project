@@ -54,7 +54,7 @@ $f3->route('GET /library', function()
 });
 
 // Add Plant
-$f3->route('GET /add', function()
+$f3->route('GET|POST /add', function()
 {
     $GLOBALS['con']->addPlant();
 });
