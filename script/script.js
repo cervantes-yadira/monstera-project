@@ -74,6 +74,7 @@ function capitalizeFirstLetter(string) {
 async function loadPlantInfo(event){
     event.preventDefault();
     console.log("Button clicked");
+    document.getElementById('rightPlantInfo').style.display = 'block';      //sprint3
 
     let plantId = event.currentTarget.dataset.id;
     console.log(plantId);
@@ -120,7 +121,37 @@ async function loadPlantInfo(event){
     let images = document.querySelector("#plantImage");
     images.src = data.default_image.thumbnail;
 
-
 }
+
+//Sprint3   This opens the popup box
+// Get modal element
+let modal = document.getElementById("myModal");
+
+// Get open modal button
+let btn = document.getElementById("openModalBtn");
+
+// Get close button
+let span = document.getElementsByClassName("close")[0];
+
+// Open modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// Close modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Close modal if clicked outside the box
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}
+
+// document.getElementById('yesAdd').onclick = function() {
+//     window.location.href = 'views/add-plant.html';
+// };
 
 
