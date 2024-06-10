@@ -246,6 +246,54 @@ class Controller3
     }
 
     /**
+     * Water plant and reset lastWatered date.
+     *
+     * @return void
+     */
+    function waterPlant(): void
+    {
+
+        ini_set('display_errors', 1);
+        error_reporting(E_ALL);
+
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/../config.php';
+        require_once $path;
+
+        try {
+            //Instantiate our PDO databse object
+            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            //    echo 'Connected to database';
+        }
+        catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        //Below gets the user id
+        $f3 = Base::instance();
+
+        //Below gets plant id
+//        $plant = $f3->get('SESSION.plant');
+//        $plantId = htmlspecialchars($plant->getPlantId(), ENT_QUOTES, 'UTF-8');
+//        echo $plantId;
+
+        $sql = "UPDATE Plants SET LastWatered = :lastWatered WHERE PlantId = 4";
+
+        $statement = $dbh->prepare($sql);
+
+        $todayDate = date('Y-m-d');
+        $statement->bindParam(":lastWatered", $todayDate);
+
+
+        $statement->execute();
+        echo "Plant deleted successfully";
+
+
+        //renders back to the same page
+        $view = new Template();
+        echo $view->render('views/plant-library.html');
+    }
+
+    /**
      * Renders the view plant view template.
      *
      * @return void

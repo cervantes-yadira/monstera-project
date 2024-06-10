@@ -53,6 +53,12 @@ $f3->route('GET /library', function()
     $GLOBALS['con']->plantLibrary();
 });
 
+// Water Plant
+$f3->route('GET /water', function()
+{
+    $GLOBALS['con']->waterPlant();
+});
+
 // Add Plant
 $f3->route('GET|POST /add', function()
 {

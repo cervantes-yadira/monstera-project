@@ -12,7 +12,7 @@ This file displays plants a user has added to the tracker and notifications.
     <include href="views/navbar.html"></include>
 
     <div class="library-container">
-        <h3>Plant Library</h3>
+        <h3>Plant Library HTML</h3>
         <p>
 
         </p>
@@ -30,30 +30,7 @@ This file displays plants a user has added to the tracker and notifications.
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Monty</td>
-                        <td>Monstera</td>
-                        <td>7 days ago</td>
-                        <td><a href="view">view/edit</a></td>
-                    </tr>
-                    <tr>
-                        <td>Spike</td>
-                        <td>Triangle Cactus</td>
-                        <td>5 days ago</td>
-                        <td><a href="view">view/edit</a></td>
-                    </tr>
-                    <tr>
-                        <td>Cupid</td>
-                        <td>Bleeding Heart</td>
-                        <td>2 days ago</td>
-                        <td><a href="view">view/edit</a></td>
-                    </tr>
-                    <tr>
-                        <td>Maple</td>
-                        <td>Japanese Maple</td>
-                        <td>2 days ago</td>
-                        <td><a href="view">view/edit</a></td>
-                    </tr>
+                    <include href="models/libraryTable.php"></include>
                     </tbody>
                 </table>
             </div>
@@ -62,11 +39,12 @@ This file displays plants a user has added to the tracker and notifications.
             <div class="col-4 notification-list">
                 <ul class="list-group list-unstyled notification-list" id="notificationList">
                     <li class="list-group-item">Reminders</li>
-                    <li class="list-group-item">
-                        <i class="fa-solid fa-bell"></i>
-                        Monty is due for watering
-                        <a href="" class="waterBtn">Water</a>
-                    </li>
+                    <!--                    <li class="list-group-item">-->
+                    <!--                        <i class="fa-solid fa-bell"></i>-->
+                    <!--                        Monty is due for watering-->
+                    <!--                        <a href="" class="waterBtn">Water</a>-->
+                    <!--                    </li>-->
+                    <include href="models/waterReminder.php"></include>
 
                 </ul>
             </div>
@@ -80,7 +58,7 @@ This file displays plants a user has added to the tracker and notifications.
     </div>
 </div>
 
-<script src="script/getWater.js"></script>
+<!--<script src="script/getWater.js"></script>-->
 <include href="views/footer.html"></include>
 </body>
 </html>
