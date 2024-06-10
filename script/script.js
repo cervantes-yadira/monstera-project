@@ -52,7 +52,7 @@ function displayResult(array)
         let list = document.createElement("li");
         let href = document.createElement("a");
 
-        href.textContent = array.data[i].common_name;
+        href.textContent = array.data[i].common_name + " (" + array.data[i].scientific_name + ") ";
         href.href = "#";
         href.dataset.id = array.data[i].id;     //assign id as value using dataset so it can be retrived in the next method
         href.id = "plantSearchList";            //add id attribute to the anchor tag
@@ -65,6 +65,7 @@ function displayResult(array)
     }
 
 }
+
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -100,8 +101,11 @@ async function loadPlantInfo(event){
     let scientificName = document.querySelector("#scientific_name");
     scientificName.textContent = data.scientific_name;
 
-    let wateringSchedule = document.querySelector("#watering");
-    wateringSchedule.textContent = data.watering;
+    let otherName = document.querySelector("#other_name");
+    otherName.textContent = data.other_name;
+
+    // let wateringSchedule = document.querySelector("#watering");
+    // wateringSchedule.textContent = data.watering;
 
     let wateringBenchmark = document.querySelector("#watering_general_benchmark");
     wateringBenchmark.textContent = data.watering_general_benchmark.value + ' ' + data.watering_general_benchmark.unit;

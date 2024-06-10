@@ -15,13 +15,13 @@ This file displays plants a user has added to the tracker and notifications.
     <h1>Plant Dictionary</h1>
 
     <form id="plant-search-form">
-        <input id="query" class="col-11 " type="text" name="query" placeholder="Insert Plant Name Here"><br><br>
+        <input id="query" class="col-6" type="text" name="query" placeholder="Insert Plant Name Here">
         <button type="submit" id="plantSearch">Search</button>
     </form>
-    <br><br>
+    <br>
     <!-- use CSS for result and info-->
     <div id="plantContainer" >
-        <div id="plantResult" class="col-4 fs-5 p-3">
+        <div id="plantResult" class="col-6 fs-5 p-3">
             <h3>Results</h3>
             <br>
             <ul id="apiList">
@@ -38,10 +38,11 @@ This file displays plants a user has added to the tracker and notifications.
                         <div class="col-7">
                             <p><label>Common Name:</label><br> <span id="common_name"></span></p>
                             <p><label>Scientific Name:</label><br> <span id="scientific_name"></span></p>
+                            <p><label>Other Name:</label><br> <span id="other_name"></span></p>
                             <p><label>Sunlight:</label><br> <span id="sunlight"></span></p>
                             <!--                        <p><label>Pruning Months:</label><br> <span id="pruning_month"></span></p>-->
-                            <p><label>Watering Schedule:</label><br> <span id="watering"></span></p>
-                            <p><label>Watering Benchmark:</label><br> <span id="watering_general_benchmark"></span></p>
+<!--                            <p><label>Watering Schedule:</label><br> <span id="watering"></span></p>-->
+                            <p><label>Watering Schedule:</label><br> <span id="watering_general_benchmark"></span></p>
                             <br><br>
                         </div>
                         <div class="col-4">
@@ -54,15 +55,17 @@ This file displays plants a user has added to the tracker and notifications.
                     <button id="openModalBtn">Add Plant</button>
 
                     <div id="myModal" class="modal">
-                        <div class="modal-content mx-auto col-7 p-5">
+                        <div class="modal-content mx-auto col-4 p-5">
                             <span class="close">&times;</span>
 <!--                            <form id="userForm">-->
                                 <h1>Would you like to add this plant to your library?</h1><br>
 <!--                                <button class="" id="yesAdd">Yes</button>-->
 <!--                                <div class="col-2"></div>-->
 <!--                                <button class="" id="noAdd">No</button>-->
-                                <a href="add" class="button">Yes</a>
-                                <a href="" class="button">No</a>
+                                <div class="buttonContainer">
+                                    <a href="add" class="button col-1" id="yesAdd">Yes</a>
+                                    <a href="" class="col-1" id="noAdd">No</a>
+                                </div>
 
                             <!--                            </form>-->
                         </div>

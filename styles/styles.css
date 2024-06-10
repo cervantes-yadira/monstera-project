@@ -95,6 +95,14 @@ body {
     border-radius: 10px;
 }
 
+#noAdd{
+    padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+    background-color: #ff5656;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
 /* for mobile responsiveness, matches bootstraps sm breakpoint */
 @media (max-width: 575.98px) {
     .form-container {
@@ -136,7 +144,7 @@ body {
 
 #plantImage{
     border: solid black 1px;
-    border-radius: 50%;
+    border-radius: 10%;
 }
 
 /* plant library styles */
@@ -224,4 +232,19 @@ body {
     background-color: #DAE2B6;
     width: 70%;
 }
+
+.buttonContainer {
+    display: flex;
+    gap: 10%;
+}
+
+#yesAdd, #noAdd {
+    text-align: center;
+}
+
+#query {
+    margin-right: 10%;
+}
+
+
 
