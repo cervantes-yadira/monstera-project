@@ -103,6 +103,15 @@ body {
     border-radius: 10px;
 }
 
+.waterBtn{
+    padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+    background-color: #2999fa;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+
+}
+
 /* for mobile responsiveness, matches bootstraps sm breakpoint */
 @media (max-width: 575.98px) {
     .form-container {
@@ -246,5 +255,8 @@ body {
     margin-right: 10%;
 }
 
+.notification-list, .list-group-item {
+    background-color: #F7EDDB;
+}
 
 
