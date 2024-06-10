@@ -154,8 +154,30 @@ window.onclick = function(event) {
     }
 }
 
-// document.getElementById('yesAdd').onclick = function() {
-//     window.location.href = 'views/add-plant.html';
-// };
+
+// //Display plant that is due for watering
+// document.addEventListener('DOMContentLoaded', function() {
+//     fetch('getWaterDate.php')
+//         .then(response => response.json())
+//         .then(plants => {
+//             const notificationList = document.getElementById('notificationList');
+//
+//             plants.forEach(plant => {
+//                 const lastWateredDate = new Date(plant.LastWatered);
+//                 const nextWateringDate = new Date(lastWateredDate);
+//                 nextWateringDate.setDate(lastWateredDate.getDate() + plant.wateringPeriod);
+//
+//                 const today = new Date();
+//                 if (today >= nextWateringDate) {
+//                     const listItem = document.createElement('li');
+//                     listItem.className = 'list-group-item';
+//                     listItem.innerHTML = `<i class="fas fa-bell"></i> ${plant.Nickname} is due for watering`;
+//                     notificationList.appendChild(listItem);
+//                     console.log("Date Testing");
+//                 }
+//             });
+//         })
+//         .catch(error => console.error('Error fetching plant data:', error));
+// });
 
 
