@@ -34,6 +34,7 @@ class Controller3
     /**
      * Renders the user sign-up view template.
      *
+     * @param $dbh
      * @return void
      */
     function signUp($dbh): void
@@ -135,6 +136,20 @@ class Controller3
 
         $view = new Template();
         echo $view->render('views/sign-in.html');
+    }
+
+    /**
+     * Signs out of the website and redirects to homepage.
+     *
+     * @return void
+     */
+    function signOut()
+    {
+        if($this->_f3->get("SESSION.user") !== null) {
+            $this->_f3->set("SESSION.user", null);
+        }
+
+        $this->_f3->reroute('/');
     }
 
     /**

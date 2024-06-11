@@ -22,7 +22,16 @@ This file displays the navbar and is included in each webpage.
                 <a href="contact" class="nav-item nav-link">Contact Us</a>
             </div>
             <div class="navbar-nav ms-auto">
-                <a href="#" class="button">Sign-out</a>
+                <!-- checks if user is signed in -->
+                <check if="{{ @SESSION.user !== null }}">
+                    <true>
+                        <a href="sign-out" class="button">Sign-out</a>
+                    </true>
+                    <false>
+                        <a href="sign-in" class="button me-3">Sign-in</a>
+                        <a href="sign-up" class="button">Sign-up</a>
+                    </false>
+                </check>
             </div>
         </div>
     </div>

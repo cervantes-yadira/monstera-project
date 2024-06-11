@@ -22,8 +22,7 @@ $f3 = Base::instance();
 $con = new Controller3($f3);
 $dataLayer = new DataLayer3();
 
-
-
+// home page
 $f3->route('GET /', function()
 {
     $GLOBALS['con']->home();
@@ -39,6 +38,12 @@ $f3->route('GET|POST /sign-up', function($dbh)
 $f3->route('GET|POST /sign-in', function()
 {
     $GLOBALS['con']->signIn();
+});
+
+// sign out
+$f3->route('GET /sign-out', function()
+{
+    $GLOBALS['con']->signOut();
 });
 
 //Contact Us form
