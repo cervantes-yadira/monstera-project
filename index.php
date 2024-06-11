@@ -71,7 +71,7 @@ $f3->route('GET|POST /add', function()
 });
 
 // View Plant
-$f3->route('GET /view/@id', function()
+$f3->route('GET|POST /view', function()
 {
     $GLOBALS['con']->viewPlant();
 });

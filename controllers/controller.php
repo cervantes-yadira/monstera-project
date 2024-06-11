@@ -170,6 +170,9 @@ class Controller3
      */
     function plantLibrary()
     {
+//        $data = new DataLayer3();
+//        $data->getPlants();
+
         $view = new Template();
         echo $view->render('views/plant-library.html');
     }
@@ -202,7 +205,6 @@ class Controller3
                 }
 
             }
-
 
             //validate all plant Info
             if (Validate3::validName($_POST['plantName'])){
@@ -315,14 +317,23 @@ class Controller3
      */
     function viewPlant(): void
     {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $dataLayer = new DataLayer3();
 
-        $plantId = $this->_f3->get('PARAMS.id');
-        $plants = $this->_f3->get("SESSION.plants");
+            // retrieve plant id and plant data
+            $plantId = $_POST['plantId'];
+            $plant = $dataLayer->getPlant($plantId)[0];
+            $images = $dataLayer->getImages($plantId);
 
-        foreach($plants as $plant) {
-            if ($plant->getPlantId() === $plantId) {
-                $this->_f3->set("SESSION.currentPlant", $plant);
-            }
+            // create a plant object
+            $plantObject = new Plant($plant['UserId'], $plant['Nickname'],
+                $plant['Species'], $plant['WateringPeriod'],
+                $plant['LastWatered'], $plant['AdoptionDate'],
+                $plant['PlantId'], $images
+            );
+
+            // add object to session array
+            $this->_f3->set("SESSION.plant", $plantObject);
         }
 
         $view = new Template();

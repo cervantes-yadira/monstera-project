@@ -22,23 +22,23 @@ This file displays the information and images of a single plant.
                         <tbody>
                             <tr>
                                 <td class="fw-bold">Name:</td>
-                                <td>{{ @SESSION.currentPlant->getPlantName() }}</td>
+                                <td>{{ @SESSION.plant->getPlantName() }}</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Species:</td>
-                                <td>{{ @SESSION.currentPlant->getSpeciesName() }}</td>
+                                <td>{{ @SESSION.plant->getSpeciesName() }}</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Adoption Date:</td>
-                                <td>{{ @SESSION.currentPlant->getAdoptDate() }}</td>
+                                <td>{{ @SESSION.plant->getAdoptDate() }}</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Watering Period:</td>
-                                <td>{{ @SESSION.currentPlant->getWaterPeriod() }}</td>
+                                <td>{{ @SESSION.plant->getWaterPeriod() }}</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Last Watered:</td>
-                                <td>{{ @SESSION.currentPlant->getWaterDate() }}</td>
+                                <td>{{ @SESSION.plant->getWaterDate() }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -53,7 +53,7 @@ This file displays the information and images of a single plant.
                 <div class="m-4">
                     <!-- evenly spaces all images -->
                     <div class="row mb-4 gx-5">
-                        <repeat group="{{ @SESSION.currentPlant->getFiles() }}" value="{{ @image }}">
+                        <repeat group="{{ @SESSION.plant->getFiles() }}" value="{{ @image }}">
                             <div class="col-3">
                                 <img class="gallery-image" alt="Picture of Plant" src="{{ @image }}">
                             </div>

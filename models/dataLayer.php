@@ -120,22 +120,71 @@ class DataLayer3
         return $this->_dbh->lastInsertId();
     }
 
+    /**
+     * Retrieves all images associated with a given plant from the database.
+     *
+     * @param $plantId string the ID of the plant
+     * @return array|false an array of images, or false if an error occurred
+     */
+    function getImages(string $plantId)
+    {
+        // define query
+        $sql = "SELECT Url FROM PlantPics WHERE PlantId = $plantId";
 
+        // prepare the statement
+        $statement = $this->_dbh->prepare($sql);
 
-//    function getPlantsInfo() {
-//
-//        $sql = "SELECT Nickname, LastWatered, wateringPeriod FROM Plants";
-//        //$sql = "SELECT Nickname, LastWatered, wateringPeriod FROM Plants WHERE UserId = :id";
-//
-//        $statement = $this->_dbh->prepare($sql);
-//        $statement->execute();
-//        $plants = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//        header('Content-Type: application/json');
-//        echo json_encode($plants);
-//
-//        return $plants;
-//    }
+        // execute the query
+        $statement->execute();
+
+        // process the results
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Retrieves all plants associated with a user from the database.
+     *
+     * @return array|false an array of plants, or false if an error occurred
+     */
+    function getPlants()
+    {
+        // retrieve user id
+        $f3 = Base::instance();
+        $user = $f3->get('SESSION.user');
+        $userId = $user->getUserId();
+
+        // define query
+        $sql = "SELECT * FROM Plants WHERE UserId = $userId";
+
+        // prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // execute the query
+        $statement->execute();
+
+        // process the results
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Retrieves a plant associated with a given plant id from the database.
+     *
+     * @return array|false an array of plant data, or false if an error occurred
+     */
+    function getPlant($plantId)
+    {
+        // define query
+        $sql = "SELECT * FROM Plants WHERE PlantId = $plantId";
+
+        // prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // execute the query
+        $statement->execute();
+
+        // process the results
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
 
