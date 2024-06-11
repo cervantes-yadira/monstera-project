@@ -315,6 +315,16 @@ class Controller3
      */
     function viewPlant(): void
     {
+
+        $plantId = $this->_f3->get('PARAMS.id');
+        $plants = $this->_f3->get("SESSION.plants");
+
+        foreach($plants as $plant) {
+            if ($plant->getPlantId() === $plantId) {
+                $this->_f3->set("SESSION.currentPlant", $plant);
+            }
+        }
+
         $view = new Template();
         echo $view->render('views/view-plant.html');
     }

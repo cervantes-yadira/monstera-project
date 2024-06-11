@@ -22,30 +22,30 @@ This file displays the information and images of a single plant.
                         <tbody>
                             <tr>
                                 <td class="fw-bold">Name:</td>
-                                <td>Monty</td>
+                                <td>{{ @SESSION.currentPlant->getPlantName() }}</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Species:</td>
-                                <td>Monstera Deliciosa</td>
+                                <td>{{ @SESSION.currentPlant->getSpeciesName() }}</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Adoption Date:</td>
-                                <td>06/25/2021</td>
+                                <td>{{ @SESSION.currentPlant->getAdoptDate() }}</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Watering Period:</td>
-                                <td>5 days</td>
+                                <td>{{ @SESSION.currentPlant->getWaterPeriod() }}</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Last Watered:</td>
-                                <td>7 days ago</td>
+                                <td>{{ @SESSION.currentPlant->getWaterDate() }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- plant gallery -->
+             <!-- plant gallery -->
             <div class="gallery">
                 <div class="gallery-header">
                     <h5 class="ms-4 my-2">Images:</h5>
@@ -53,32 +53,11 @@ This file displays the information and images of a single plant.
                 <div class="m-4">
                     <!-- evenly spaces all images -->
                     <div class="row mb-4 gx-5">
-                        <div class="col-3">
-                            <img class="gallery-image" alt="Picture of Plant" src="https://indoorplantaddicts.com/wp-content/uploads/2020/01/Monstera-Deliciosa.jpg">
-                        </div>
-                        <div class="col-3">
-                            <img class="gallery-image" alt="Picture of Plant" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.thespruce.com%2Fthmb%2F1ZDnDsy520594KDwFxxn1-3zyoc%3D%2F2000x1500%2Ffilters%3Ano_upscale()%3Amax_bytes(150000)%3Astrip_icc()%2FMonsteraGettyImages-543578398-67910f62f30a4f2b83fdaa561840d460.jpg&f=1&nofb=1&ipt=e197433acbaf1378136076c35d6e9cc1385383de0eda321d1d9cacefda06c927&ipo=images">
-                        </div>
-                        <div class="col-3">
-                            <img class="gallery-image" alt="Picture of Plant" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.TTmebEula3tj0HzMo92PhwHaFj%26pid%3DApi&f=1&ipt=6818bfef9daa8cb67fe39f51e9dcdf9b9bab17c418173376227fa53eceb19e44&ipo=images">
-                        </div>
-                        <div class="col-3">
-                            <img class="gallery-image" alt="Picture of Plant" src="https://indoorplantaddicts.com/wp-content/uploads/2020/01/Monstera-Deliciosa.jpg">
-                        </div>
-                    </div>
-                    <div class="row gx-5">
-                        <div class="col-3">
-                            <img class="gallery-image" alt="Picture of Plant" src="https://indoorplantaddicts.com/wp-content/uploads/2020/01/Monstera-Deliciosa.jpg">
-                        </div>
-                        <div class="col-3">
-                            <img class="gallery-image" alt="Picture of Plant" src="https://indoorplantaddicts.com/wp-content/uploads/2020/01/Monstera-Deliciosa.jpg">
-                        </div>
-                        <div class="col-3">
-                            <img class="gallery-image" alt="Picture of Plant" src="https://indoorplantaddicts.com/wp-content/uploads/2020/01/Monstera-Deliciosa.jpg">
-                        </div>
-                        <div class="col-3">
-                            <img class="gallery-image" alt="Picture of Plant" src="https://indoorplantaddicts.com/wp-content/uploads/2020/01/Monstera-Deliciosa.jpg">
-                        </div>
+                        <repeat group="{{ @SESSION.currentPlant->getFiles() }}" value="{{ @image }}">
+                            <div class="col-3">
+                                <img class="gallery-image" alt="Picture of Plant" src="{{ @image }}">
+                            </div>
+                        </repeat>
                     </div>
                 </div>
             </div>
