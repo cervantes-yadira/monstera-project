@@ -18,13 +18,17 @@ This file displays the navbar and is included in each webpage.
             <div class="navbar-nav">
                 <a href="{{ @BASE }}" class="nav-item nav-link">Home</a>
                 <a href="dictionary" class="nav-item nav-link">Plant Dictionary</a>
-                <a href="library" class="nav-item nav-link">Plant Library</a>
+                <!-- checks if user is signed in -->
+                <check if="{{ @SESSION.user !== null }}">
+                    <a href="library" class="nav-item nav-link">Plant Library</a>
+                </check>
                 <a href="contact" class="nav-item nav-link">Contact Us</a>
             </div>
             <div class="navbar-nav ms-auto">
                 <!-- checks if user is signed in -->
                 <check if="{{ @SESSION.user !== null }}">
                     <true>
+                        <label class="nav-item nav-link"> Hello, {{ @SESSION.user->getUserName() }}!</label>
                         <a href="sign-out" class="button">Sign-out</a>
                     </true>
                     <false>
