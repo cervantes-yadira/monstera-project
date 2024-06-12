@@ -271,7 +271,7 @@ class Controller3
      */
     function waterPlant(): void
     {
-
+        $plantId = $_GET['id'];
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
 
@@ -279,35 +279,30 @@ class Controller3
         require_once $path;
 
         try {
-            //Instantiate our PDO databse object
+            // Instantiate our PDO database object
             $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-            //    echo 'Connected to database';
-        }
-        catch (PDOException $e) {
+//            echo 'Connected to database';
+        } catch (PDOException $e) {
             die($e->getMessage());
         }
 
-        //Below gets the user id
+        // Below gets the user id
         $f3 = Base::instance();
 
-        //Below gets plant id
-//        $plant = $f3->get('SESSION.plant');
-//        $plantId = htmlspecialchars($plant->getPlantId(), ENT_QUOTES, 'UTF-8');
-//        echo $plantId;
-
-        $sql = "UPDATE Plants SET LastWatered = :lastWatered WHERE PlantId = 4";
-
+        $sql = 'UPDATE Plants SET LastWatered = :lastWatered WHERE PlantId = :plantId';
         $statement = $dbh->prepare($sql);
 
         $todayDate = date('Y-m-d');
-        $statement->bindParam(":lastWatered", $todayDate);
+        $statement->bindParam(':lastWatered', $todayDate, PDO::PARAM_STR);
+        $statement->bindParam(':plantId', $plantId, PDO::PARAM_INT);
 
+//        if ($statement->execute()) {
+//            echo "Plant watered successfully";
+//        } else {
+//            echo "Error updating plant";
+//        }
 
-        $statement->execute();
-        echo "Plant deleted successfully";
-
-
-        //renders back to the same page
+        // Renders back to the same page
         $view = new Template();
         echo $view->render('views/plant-library.html');
     }
