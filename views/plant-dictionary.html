@@ -8,95 +8,96 @@ This file displays plants a user has added to the tracker and notifications.
 <include href="views/header.html"></include>
 
 <body>
-<include href="views/navbar.html"></include>
+<div class="page-content">
+    <include href="views/navbar.html"></include>
 
-<!--<h3>Plant Dictionary</h3>-->
-<div class="col-8 mx-auto">
-    <h1>Plant Dictionary</h1>
+    <!--<h3>Plant Dictionary</h3>-->
+    <div class="col-8 mx-auto">
+        <h1>Plant Dictionary</h1>
 
-    <form id="plant-search-form">
-        <input id="query" class="col-6" type="text" name="query" placeholder="Insert Plant Name Here">
-        <button type="submit" id="plantSearch">Search</button>
-    </form>
-    <br>
-    <!-- use CSS for result and info-->
-    <div id="plantContainer" >
-        <div id="plantResult" class="col-6 fs-5 p-3">
-            <h3>Results</h3>
-            <br>
-            <ul id="apiList">
-            </ul>
-        </div>
-        <div class="col-1"></div>
-        <div id="plantInfo" class="col-6 justify-content-end fs-5 p-3">
-            <h3>Plant Info</h3>
-            <br>
-            <section>
-                <div id="rightPlantInfo" class="container-fluid">
-                    <!--                    Sprint3-->
-                    <div class="row">
-                        <div class="col-7">
-                            <p><label>Common Name:</label><br> <span id="common_name"></span></p>
-                            <p><label>Scientific Name:</label><br> <span id="scientific_name"></span></p>
-                            <p><label>Other Name:</label><br> <span id="other_name"></span></p>
-                            <p><label>Sunlight:</label><br> <span id="sunlight"></span></p>
-                            <!--                        <p><label>Pruning Months:</label><br> <span id="pruning_month"></span></p>-->
-<!--                            <p><label>Watering Schedule:</label><br> <span id="watering"></span></p>-->
-                            <p><label>Watering Schedule:</label><br> <span id="watering_general_benchmark"></span></p>
-                            <br><br>
+        <form id="plant-search-form">
+            <input id="query" class="col-6" type="text" name="query" placeholder="Insert Plant Name Here">
+            <button type="submit" id="plantSearch">Search</button>
+        </form>
+        <br>
+        <!-- use CSS for result and info-->
+        <div id="plantContainer" >
+            <div id="plantResult" class="col-6 fs-5 p-3">
+                <h3>Results</h3>
+                <br>
+                <ul id="apiList">
+                </ul>
+            </div>
+            <div class="col-1"></div>
+            <div id="plantInfo" class="col-6 justify-content-end fs-5 p-3">
+                <h3>Plant Info</h3>
+                <br>
+                <section>
+                    <div id="rightPlantInfo" class="container-fluid">
+                        <!--                    Sprint3-->
+                        <div class="row">
+                            <div class="col-7">
+                                <p><label>Common Name:</label><br> <span id="common_name"></span></p>
+                                <p><label>Scientific Name:</label><br> <span id="scientific_name"></span></p>
+                                <p><label>Other Name:</label><br> <span id="other_name"></span></p>
+                                <p><label>Sunlight:</label><br> <span id="sunlight"></span></p>
+                                <!--                        <p><label>Pruning Months:</label><br> <span id="pruning_month"></span></p>-->
+    <!--                            <p><label>Watering Schedule:</label><br> <span id="watering"></span></p>-->
+                                <p><label>Watering Schedule:</label><br> <span id="watering_general_benchmark"></span></p>
+                                <br><br>
+                            </div>
+                            <div class="col-4">
+                                <!--                        <img id="plantImage" class="justify-content-end" width="90%" src="https://perenual.com/storage/species_image/1_abies_alba/og/1536px-Abies_alba_SkalitC3A9.jpg">-->
+                                <img id="plantImage" class="justify-content-end " width="100%" height="200px" src="https://c02.purpledshub.com/uploads/sites/40/2023/04/IL3finalv2-d6cc536.jpg?w=1029&webp=1" alt="Plant Image">
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <!--                        <img id="plantImage" class="justify-content-end" width="90%" src="https://perenual.com/storage/species_image/1_abies_alba/og/1536px-Abies_alba_SkalitC3A9.jpg">-->
-                            <img id="plantImage" class="justify-content-end " width="100%" height="200px" src="https://c02.purpledshub.com/uploads/sites/40/2023/04/IL3finalv2-d6cc536.jpg?w=1029&webp=1" alt="Plant Image">
+                        <p><label>Description:</label><br> <span id="description"></span></p>
+                        <br>
+                        <button id="openModalBtn">Add Plant</button>
+
+                        <div id="myModal" class="modal">
+                            <div class="modal-content mx-auto col-4 p-5">
+                                <span class="close">&times;</span>
+    <!--                            <form id="userForm">-->
+                                    <h1>Would you like to add this plant to your library?</h1><br>
+    <!--                                <button class="" id="yesAdd">Yes</button>-->
+    <!--                                <div class="col-2"></div>-->
+    <!--                                <button class="" id="noAdd">No</button>-->
+                                    <div class="buttonContainer">
+                                        <a href="add" class="button col-1" id="yesAdd">Yes</a>
+                                        <a href="" class="col-1" id="noAdd">No</a>
+                                    </div>
+
+                                <!--                            </form>-->
+                            </div>
                         </div>
+
+                        <!--                    <div class="dicSummary">-->
+                        <!--                        <div class="dicSummary-content mx-auto col-7 p-5">-->
+                        <!--                            <span class="close">&times;</span>-->
+                        <!--                            <h1>Your plant has been added to library successfully!</h1>-->
+                        <!--                            <p>Plant Id: </p>-->
+                        <!--                            <p>User Id: </p>-->
+                        <!--                            <p>Nickname: </p>-->
+                        <!--                            <p>Species: </p>-->
+                        <!--                            <p>Adoption Date: </p>-->
+                        <!--                            <p>Watering Period: </p>-->
+                        <!--                            <p>Last Watered: </p>-->
+                        <!--                        </div>-->
+                        <!--                    </div>-->
+
+
                     </div>
-                    <p><label>Description:</label><br> <span id="description"></span></p>
-                    <br>
-                    <button id="openModalBtn">Add Plant</button>
+                    <!--                <img src="https://perenual.com/storage/species_image/1_abies_alba/og/1536px-Abies_alba_SkalitC3A9.jpg"><label>Images:</label> <span id="default_image"></span></img>-->
+                    <!--                <p><label>Care Guides:</label> <span id="care-guides"></span></p>-->
+                    <!--                <p><label>Watering Guide:</label> <span id="water_guide"></span></p>-->
+                    <!--                <p><label>Sunlight Guide:</label> <span id="sunlight_guide"></span></p>-->
+                    <!--                <p><label>Pruning Guide:</label> <span id="pruning_guide"></span></p>-->
 
-                    <div id="myModal" class="modal">
-                        <div class="modal-content mx-auto col-4 p-5">
-                            <span class="close">&times;</span>
-<!--                            <form id="userForm">-->
-                                <h1>Would you like to add this plant to your library?</h1><br>
-<!--                                <button class="" id="yesAdd">Yes</button>-->
-<!--                                <div class="col-2"></div>-->
-<!--                                <button class="" id="noAdd">No</button>-->
-                                <div class="buttonContainer">
-                                    <a href="add" class="button col-1" id="yesAdd">Yes</a>
-                                    <a href="" class="col-1" id="noAdd">No</a>
-                                </div>
-
-                            <!--                            </form>-->
-                        </div>
-                    </div>
-
-                    <!--                    <div class="dicSummary">-->
-                    <!--                        <div class="dicSummary-content mx-auto col-7 p-5">-->
-                    <!--                            <span class="close">&times;</span>-->
-                    <!--                            <h1>Your plant has been added to library successfully!</h1>-->
-                    <!--                            <p>Plant Id: </p>-->
-                    <!--                            <p>User Id: </p>-->
-                    <!--                            <p>Nickname: </p>-->
-                    <!--                            <p>Species: </p>-->
-                    <!--                            <p>Adoption Date: </p>-->
-                    <!--                            <p>Watering Period: </p>-->
-                    <!--                            <p>Last Watered: </p>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-
-
-                </div>
-                <!--                <img src="https://perenual.com/storage/species_image/1_abies_alba/og/1536px-Abies_alba_SkalitC3A9.jpg"><label>Images:</label> <span id="default_image"></span></img>-->
-                <!--                <p><label>Care Guides:</label> <span id="care-guides"></span></p>-->
-                <!--                <p><label>Watering Guide:</label> <span id="water_guide"></span></p>-->
-                <!--                <p><label>Sunlight Guide:</label> <span id="sunlight_guide"></span></p>-->
-                <!--                <p><label>Pruning Guide:</label> <span id="pruning_guide"></span></p>-->
-
-            </section>
+                </section>
+            </div>
         </div>
     </div>
-
 </div>
 
 <script src="script/script.js"></script>
