@@ -26,7 +26,14 @@
                             <td>{{ @plant->getPlantName() }}</td>
                             <td>{{ @plant->getSpeciesName() }}</td>
                             <td>{{ @plant->getWaterDate() }}</td>
-                            <td><a href="view/{{ @plant->getPlantId() }}">view/edit</a></td>
+                            <td>
+                                <!-- allows user to view specific plant -->
+                                <form method="POST" action="view">
+                                    <label hidden="hidden" for="plant-id"></label>
+                                    <input id="plant-id" hidden="hidden" value="{{ @plant->getPlantId() }}" name="plantId">
+                                    <button class="nav-item nav-link" type="submit">view/edit</button>
+                                </form>
+                            </td>
                         </tr>
                     </repeat>
                     </tbody>
