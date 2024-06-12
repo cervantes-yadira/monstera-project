@@ -172,8 +172,64 @@ class Controller3
      */
     function plantLibrary()
     {
-//        $data = new DataLayer3();
-//        $data->getPlants();
+        $user = $this->_f3->get("SESSION.user");
+        $plants = $GLOBALS['dataLayer']->getPlantInfo($user);
+        $userId = $user->getUserId();
+        $plantObjects = []; // Yadira
+
+        // Set today's date
+        $today = new DateTime();
+        $todayDate = $today->format('Y-m-d');
+
+        $reminderPlant = [];
+
+        // Turn plants from SQL query into plant objects
+        foreach ($plants as $plant) {
+            // Create plant object
+            $plantObject = new Plant(
+                $userId,
+                $plant['Nickname'],
+                $plant['Species'],
+                $plant['WateringPeriod'],
+                $plant['LastWatered'],
+                $plant['AdoptionDate'],
+                $plant['PlantId'],
+                null
+            );
+
+            // Add to plantObjects array
+            $plantObjects[] = $plantObject;
+
+            // Calculate next watering date
+            $lastWateredDate = new DateTime($plant['LastWatered']);
+            $nextWateredDate = clone $lastWateredDate;
+            $nextWateredDate->modify("+{$plant['WateringPeriod']} days");
+            $nextWatered = $nextWateredDate->format('Y-m-d');
+
+            // Only add to reminderPlant array if nextWatered date is today or before today
+            if ($nextWateredDate <= $today) {
+                $reminderPlant[] = [
+                    'Nickname' => $plantObject->getPlantName(),
+                    'NextWatered' => $nextWatered,
+                    'PlantId' => $plantObject->getPlantId(),
+                    'Species' => $plantObject->getSpeciesName(),
+                    'LastWatered' => $plantObject->getWaterDate()
+                ];
+            }
+        }
+
+        // Debug: Print plantObjects and reminderPlant
+//        echo "plantObjects:<br>";
+//        var_dump($plantObjects);
+//        echo "<br>reminderPlant:<br>";
+//        print_r($reminderPlant);
+
+        // Set plantObjects and reminderPlant to session
+        $this->_f3->set('plantTest', $plantObjects);
+        $this->_f3->set('reminderPlant', $reminderPlant);
+
+        // Add plantObjects array to session array
+        $this->_f3->set("SESSION.plants", $plantObjects);
 
         $view = new Template();
         echo $view->render('views/plant-library.html');
@@ -281,29 +337,75 @@ class Controller3
         try {
             // Instantiate our PDO database object
             $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-//            echo 'Connected to database';
         } catch (PDOException $e) {
             die($e->getMessage());
         }
 
-        // Below gets the user id
-        $f3 = Base::instance();
+        // Set today date
+        $today = new DateTime();
+        $todayDate = $today->format('Y-m-d');
 
-        $sql = 'UPDATE Plants SET LastWatered = :lastWatered WHERE PlantId = :plantId';
+        // Update the LastWatered date
+        $sql = "UPDATE Plants SET LastWatered = :lastWatered WHERE PlantId = :plantId";
         $statement = $dbh->prepare($sql);
 
-        $todayDate = date('Y-m-d');
-        $statement->bindParam(':lastWatered', $todayDate, PDO::PARAM_STR);
+        $statement->bindParam(":lastWatered", $todayDate);
         $statement->bindParam(':plantId', $plantId, PDO::PARAM_INT);
+
         $statement->execute();
 
 //        if ($statement->execute()) {
 //            echo "Plant watered successfully";
 //        } else {
-//            echo "Error updating plant";
+//            echo "Error watering plant";
 //        }
 
-        // Renders back to the same page
+        // Refresh the plant list after watering
+        $user = $this->_f3->get("SESSION.user");
+        $plants = $GLOBALS['dataLayer']->getPlantInfo($user);
+
+        $plantObjects = [];
+        $reminderPlant = [];
+
+        foreach ($plants as $plant) {
+            // Create plant object
+            $plantObject = new Plant(
+                $user->getUserId(),
+                $plant['Nickname'],
+                $plant['Species'],
+                $plant['WateringPeriod'],
+                $plant['LastWatered'],
+                $plant['AdoptionDate'],
+                $plant['PlantId'],
+                null
+            );
+
+            // Add to plantObjects array
+            $plantObjects[] = $plantObject;
+
+            // Calculate next watering date
+            $lastWateredDate = new DateTime($plant['LastWatered']);
+            $nextWateredDate = clone $lastWateredDate;
+            $nextWateredDate->modify("+{$plant['WateringPeriod']} days");
+            $nextWatered = $nextWateredDate->format('Y-m-d');
+
+            // Only add to reminderPlant array if nextWatered date is today or before today
+            if ($nextWateredDate <= $today) {
+                $reminderPlant[] = [
+                    'Nickname' => $plantObject->getPlantName(),
+                    'NextWatered' => $nextWatered,
+                    'PlantId' => $plantObject->getPlantId(),
+                    'Species' => $plantObject->getSpeciesName(),
+                    'LastWatered' => $plantObject->getWaterPeriod()
+                ];
+            }
+        }
+
+        // Set the plantObjects and reminderPlant variables to the session
+        $this->_f3->set('plantTest', $plantObjects);
+        $this->_f3->set('reminderPlant', $reminderPlant);
+
+        // Render back to the plant library page
         $view = new Template();
         echo $view->render('views/plant-library.html');
     }

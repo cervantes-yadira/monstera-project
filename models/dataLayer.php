@@ -186,5 +186,41 @@ class DataLayer3
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    /**
+     * Water plant and reset lastWatered date.
+     *
+     * @return void
+     */
+    function waterPlant($plant): void
+    {
+        $sql = "UPDATE Plants SET LastWatered = :lastWatered WHERE PlantId = :plantId";
+
+        $statement = $this->_dbh->prepare($sql);
+        $todayDate = date('Y-m-d');
+        $statement->bindParam(":lastWatered", $todayDate);
+
+        $plantId = $plant->getPlantId();
+        $statement->bindParam(":plantId", $plantId);
+        $statement->execute();
+
+        $statement->execute();
+        echo "Plant watered successfully";
+
+    }
+
+    function getPlantInfo($user)
+    {
+        $sql = "SELECT PlantId, UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered FROM Plants WHERE UserId = :userId";
+
+        $statement = $this->_dbh->prepare($sql);
+        $userId = $user->getUserId();
+        $statement->bindParam(":userId",$userId);
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+
+    }
 }
 

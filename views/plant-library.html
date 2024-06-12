@@ -1,10 +1,3 @@
-<!--
-Authors: Yadira Cervantes
-File: plant-library.html
-
-This file displays plants a user has added to the tracker and notifications.
--->
-
 <include href="views/header.html"></include>
 
 <body>
@@ -13,9 +6,7 @@ This file displays plants a user has added to the tracker and notifications.
 
     <div class="library-container">
         <h3>Plant Library</h3>
-        <p>
-
-        </p>
+        <p></p>
 
         <div class="row">
             <!-- user's plant table -->
@@ -30,7 +21,14 @@ This file displays plants a user has added to the tracker and notifications.
                     </tr>
                     </thead>
                     <tbody>
-                    <include href="models/libraryTable.php"></include>
+                    <repeat group="{{ @plantTest }}" value="{{ @plant }}">
+                        <tr>
+                            <td>{{ @plant->getPlantName() }}</td>
+                            <td>{{ @plant->getSpeciesName() }}</td>
+                            <td>{{ @plant->getWaterDate() }}</td>
+                            <td><a href="view/{{ @plant->getPlantId() }}">view/edit</a></td>
+                        </tr>
+                    </repeat>
                     </tbody>
                 </table>
             </div>
@@ -38,17 +36,16 @@ This file displays plants a user has added to the tracker and notifications.
             <!-- reminders list -->
             <div class="col-4 notification-list">
                 <ul class="list-group list-unstyled notification-list" id="notificationList">
-                    <li class="list-group-item">Reminders</li><br>
-                    <!--                    <li class="list-group-item">-->
-                    <!--                        <i class="fa-solid fa-bell"></i>-->
-                    <!--                        Monty is due for watering-->
-                    <!--                        <a href="" class="waterBtn">Water</a>-->
-                    <!--                    </li>-->
-                    <include href="models/waterReminder.php"></include>
-
+                    <li class="list-group-item">Reminders</li>
+                    <repeat group="{{ @reminderPlant }}" value="{{ @reminder }}">
+                        <li class="list-group-item">
+                            <i class="fa-solid fa-bell"></i>
+                            <a href="water?id={{ @reminder['PlantId'] }}" class="waterBtn">Water</a>
+                            {{ @reminder['Nickname'] }} is due for watering
+                        </li>
+                    </repeat>
                 </ul>
             </div>
-
         </div>
 
         <!-- centers button under table -->
@@ -58,7 +55,6 @@ This file displays plants a user has added to the tracker and notifications.
     </div>
 </div>
 
-<!--<script src="script/getWater.js"></script>-->
 <include href="views/footer.html"></include>
 </body>
 </html>
