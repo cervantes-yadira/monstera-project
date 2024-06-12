@@ -185,6 +185,10 @@ class Controller3
 
         // Turn plants from SQL query into plant objects
         foreach ($plants as $plant) {
+            // grab images for the plant
+            $plantId = $plant['PlantId'];
+            $images = $GLOBALS['dataLayer']->getImages($plantId);
+
             // Create plant object
             $plantObject = new Plant(
                 $userId,
@@ -193,8 +197,8 @@ class Controller3
                 $plant['WateringPeriod'],
                 $plant['LastWatered'],
                 $plant['AdoptionDate'],
-                $plant['PlantId'],
-                null
+                $plantId,
+                $images[0]["Url"]
             );
 
             // Add to plantObjects array
@@ -227,9 +231,7 @@ class Controller3
         // Set plantObjects and reminderPlant to session
         $this->_f3->set('plantTest', $plantObjects);
         $this->_f3->set('reminderPlant', $reminderPlant);
-
-        // Add plantObjects array to session array
-        $this->_f3->set("SESSION.plants", $plantObjects);
+        $this->_f3->set('SESSION.plants', $plantObjects);
 
         $view = new Template();
         echo $view->render('views/plant-library.html');
@@ -312,7 +314,7 @@ class Controller3
 
             }
 
-//            $this->_f3->reroute('/library');
+            $this->_f3->reroute('library');
 
         }
 
@@ -363,6 +365,7 @@ class Controller3
         // Refresh the plant list after watering
         $user = $this->_f3->get("SESSION.user");
         $plants = $GLOBALS['dataLayer']->getPlantInfo($user);
+        $images = $GLOBALS['dataLayer']->getImages($plantId);
 
         $plantObjects = [];
         $reminderPlant = [];
@@ -377,7 +380,7 @@ class Controller3
                 $plant['LastWatered'],
                 $plant['AdoptionDate'],
                 $plant['PlantId'],
-                null
+                $images[0]["Url"]
             );
 
             // Add to plantObjects array
@@ -404,6 +407,7 @@ class Controller3
         // Set the plantObjects and reminderPlant variables to the session
         $this->_f3->set('plantTest', $plantObjects);
         $this->_f3->set('reminderPlant', $reminderPlant);
+        $this->_f3->set('SESSION.plants', $plantObjects);
 
         // Render back to the plant library page
         $view = new Template();
@@ -418,22 +422,15 @@ class Controller3
     function viewPlant(): void
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $dataLayer = new DataLayer3();
+            $plants = $this->_f3->get("SESSION.plants");
 
-            // retrieve plant id and plant data
-            $plantId = $_POST['plantId'];
-            $plant = $dataLayer->getPlant($plantId)[0];
-            $images = $dataLayer->getImages($plantId);
-
-            // create a plant object
-            $plantObject = new Plant($plant['UserId'], $plant['Nickname'],
-                $plant['Species'], $plant['WateringPeriod'],
-                $plant['LastWatered'], $plant['AdoptionDate'],
-                $plant['PlantId'], $images
-            );
-
-            // add object to session array
-            $this->_f3->set("SESSION.plant", $plantObject);
+            // find plant in session array
+            foreach ($plants as $plant) {
+                if ($plant->getPlantId() === $_POST['plantId']) {
+                    $this->_f3->set("SESSION.plant", $plant);
+                    break;
+                }
+            }
         }
 
         $view = new Template();

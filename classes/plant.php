@@ -132,7 +132,7 @@ class Plant
      */
     public function getFiles()
     {
-        return $this->files;
+        return $this->_files;
     }
 
     /**
@@ -140,7 +140,7 @@ class Plant
      */
     public function setFiles($files): void
     {
-        $this->files = $files;
+        $this->_files = $files;
     }
 
     /**

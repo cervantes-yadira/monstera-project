@@ -53,11 +53,9 @@ This file displays the information and images of a single plant.
                 <div class="m-4">
                     <!-- evenly spaces all images -->
                     <div class="row mb-4 gx-5">
-                        <repeat group="{{ @SESSION.plant->getFiles() }}" value="{{ @image }}">
-                            <div class="col-3">
-                                <img class="gallery-image" alt="Picture of Plant" src="{{ @image }}">
-                            </div>
-                        </repeat>
+                        <div class="col-3">
+                            <img class="gallery-image" alt="Picture of Plant" src="{{ @SESSION.plant->getFiles() }}">
+                        </div>
                     </div>
                 </div>
             </div>

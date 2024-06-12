@@ -115,7 +115,7 @@ class DataLayer3
         //4 execute the query
         $statement->execute();
 
-        header('Content-Type: application/json');
+        //header('Content-Type: application/json');
         //5 (optional) process the results
         return $this->_dbh->lastInsertId();
     }
