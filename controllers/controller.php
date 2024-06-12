@@ -61,7 +61,9 @@ class Controller3
             if (Validate3::validEmail($_POST['email'])) {
                 $email = $_POST['email'];
             } else {
-                $this->_f3->set('errors["email"]', "Please enter a valid email");
+                $this->_f3->set('errors["email"]',
+                    "Please use this format: email@example.com"
+                );
             }
             if(Validate3::validPassword($_POST['password'])){
                 if(Validate3::passwordMatch($_POST['password'], $_POST['password-confirm'])){
@@ -347,7 +349,66 @@ class Controller3
      */
     function contactUs()
     {
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            // get form data
+            $name = '';
+            $email = '';
+            $message = '';
+
+            // check if each value is valid
+            if (Validate3::validName($_POST['name'])) {
+                $name = $_POST['name'];
+            } else {
+                $this->_f3->set("errors['name']", "Please enter a valid name");
+            }
+
+            if (Validate3::validEmail($_POST['email'])) {
+                $email = $_POST['email'];
+            } else {
+                $this->_f3->set("errors['email']",
+                    "Please use this format: email@example.com"
+                );
+            }
+
+            if (Validate3::validMessage($_POST['message'])) {
+                $message = $_POST['message'];
+            } else {
+                $this->_f3->set("errors['message']",
+                    "Please enter a valid message"
+                );
+            }
+
+            // sends message if form data is valid
+            if (empty($this->_f3->get('errors'))) {
+                $recipient = "cervantes.yadira@student.greenriver.edu";
+                $subject = "Message from " . $name . "<" . $email . ">";
+
+                $isSent = mail($recipient, $subject, $message);
+
+                if(true) {
+                    // add form data to session array
+                    $this->_f3->set("SESSION.name", $name);
+                    $this->_f3->set("SESSION.email", $email);
+                    $this->_f3->set("SESSION.message", $message);
+
+                    $this->_f3->reroute('message-success');
+                }
+            }
+        }
+
         $view = new Template();
         echo $view->render('views/contact-form.html');
+    }
+
+    /**
+     * Renders the contact receipt view template.
+     *
+     * @return void
+     */
+    function contactReceipt()
+    {
+        $view = new Template();
+        echo $view->render('views/contact-receipt.html');
     }
 }

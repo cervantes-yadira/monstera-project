@@ -52,6 +52,12 @@ $f3->route('GET|POST /contact', function()
     $GLOBALS['con']->contactUs();
 });
 
+// Contact receipt
+$f3->route('GET /message-success', function()
+{
+    $GLOBALS['con']->contactReceipt();
+});
+
 // Plant library
 $f3->route('GET /library', function()
 {
