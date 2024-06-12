@@ -295,6 +295,7 @@ class Controller3
         $todayDate = date('Y-m-d');
         $statement->bindParam(':lastWatered', $todayDate, PDO::PARAM_STR);
         $statement->bindParam(':plantId', $plantId, PDO::PARAM_INT);
+        $statement->execute();
 
 //        if ($statement->execute()) {
 //            echo "Plant watered successfully";
