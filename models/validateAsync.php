@@ -49,4 +49,26 @@ if (isset($_POST['passwordConfirm']) && isset($_POST['password'])) {
     }
 }
 
+// echoes if name is valid
+if(isset($_POST['name'])) {
+    $isValid = Validate3::validName($_POST['name']);
+
+    if ($isValid === false) {
+        echo "Please enter a valid name";
+    } else {
+        echo "";
+    }
+}
+
+// echoes if message is valid
+if(isset($_POST['message'])) {
+    $isValid = Validate3::validMessage($_POST['message']);
+
+    if ($isValid === false) {
+        echo "Please enter a message within 25-2000 characters";
+    } else {
+        echo "";
+    }
+}
+
 ?>

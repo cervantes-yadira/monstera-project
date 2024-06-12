@@ -258,3 +258,30 @@ body {
 .notification-list, .list-group-item {
     background-color: #F7EDDB;
 }
+
+/* receipt styles */
+.receipt-container {
+    width: 70%;
+    margin: auto;
+}
+
+.header {
+    background-color: var(--tea-green-color);
+}
+
+.box {
+    min-height: 15rem;
+    border-left: solid 1px #d9d9d9;
+    border-right: solid 1px #d9d9d9;
+    border-bottom: solid 1px #d9d9d9;
+    box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+}
+
+.button-secondary {
+    padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+    background-color: #A4967B;
+    border: solid 1px #A4967B;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+}

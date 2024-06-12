@@ -17,14 +17,32 @@ This file displays the contact form page and is linked in the footer of every pa
         <form action="#" method="post" class="form-container">
             <h3 class="mb-3">Contact Us</h3>
 
-            <label for="name" class="form-label">Name:</label>
-            <input id="name" name="name" type="text" class="form-control mb-3">
+            <div class="mb-3">
+                <label for="input-name" class="form-label">Name:</label>
+                <input id="input-name" name="name" type="text" class="form-control">
+                <small id="name-error" class="text-danger fw-lighter"></small>
+                <check if="{{ isset(@errors['name']) }}">
+                    <small id="errors-name" class="text-danger fw-lighter">{{ @errors['name'] }}</small>
+                </check>
+            </div>
 
-            <label for="email" class="form-label">Email:</label>
-            <input id="email" name="email" type="text" class="form-control mb-3">
+            <div class="mb-3">
+                <label for="input-email" class="form-label">Email:</label>
+                <input id="input-email" name="email" type="text" class="form-control">
+                <small id="email-error" class="text-danger fw-lighter"></small>
+                <check if="{{ isset(@errors['email']) }}">
+                    <small id="errors-email" class="text-danger fw-lighter">{{ @errors['email'] }}</small>
+                </check>
+            </div>
 
-            <label for="message" class="form-label">Message:</label>
-            <textarea id="message" name="message" rows="5" class="form-control mb-3"></textarea>
+            <div class="mb-3">
+                <label for="input-message" class="form-label">Message:</label>
+                <small id="message-error" class="text-danger fw-lighter"></small>
+                <check if="{{ isset(@errors['message']) }}">
+                    <small id="errors-message" class="text-danger fw-lighter">{{ @errors['message'] }}</small>
+                </check>
+                <textarea id="input-message" name="message" rows="5" class="form-control mb-3"></textarea>
+            </div>
 
             <!-- centers the submit button -->
             <div class="d-flex justify-content-center">
@@ -35,5 +53,6 @@ This file displays the contact form page and is linked in the footer of every pa
 
     <!-- includes footer.html -->
     <include href="views/footer.html"></include>
+    <script src="script/validate.js"></script>
 </body>
 </html>

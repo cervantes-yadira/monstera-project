@@ -1,0 +1,43 @@
+<!--
+Authors: Yadira Cervantes
+File: contact-receipt.html
+
+This file displays the contact form receipt page.
+-->
+
+<!-- includes header.html -->
+<include href="views/header.html"></include>
+
+<body>
+<div class="page-content">
+    <!-- includes navbar.html -->
+    <include href="views/navbar.html"></include>
+
+    <div class="receipt-container pt-5">
+        <div class="mb-3">
+            <h3><span class="font-important">Success!</span> Your message has been sent.</h3>
+            <h5 class="font-light">Thank you for contacting us.</h5>
+        </div>
+
+        <div class="mb-4">
+            <div class="header row py-1">
+                <h6 class="col font-bold">{{ @SESSION.name }}</h6>
+                <h6 class="col d-flex justify-content-end"><span class="font-bold">{{ @SESSION.email }}</span></h6>
+            </div>
+            <div class="row box p-2">
+                <p>
+                    {{ @SESSION.message }}
+                </p>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <a class="button-secondary" href="{{ @BASE }}">Return Home</a>
+        </div>
+    </div>
+</div>
+
+<!-- includes footer.html -->
+<include href="views/footer.html"></include>
+</body>
+</html>

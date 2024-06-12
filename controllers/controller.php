@@ -473,7 +473,7 @@ class Controller3
                 $message = $_POST['message'];
             } else {
                 $this->_f3->set("errors['message']",
-                    "Please enter a valid message"
+                    "Please enter a message within 25-2000 characters"
                 );
             }
 
