@@ -107,4 +107,27 @@ class Validate3
 
         return $uploadOk;
     }
+
+    /**
+     * Validates a message by checking its length and filtering it.
+     *
+     * @param string $message a user submitted message
+     * @return string|false string if valid, false otherwise
+     */
+    static function validMessage(string $message)
+    {
+        // sanitize the message
+        $message = htmlspecialchars($message);
+        $message = filter_var($message, FILTER_SANITIZE_ADD_SLASHES);
+
+        // get the message length
+        $length = strlen($message);
+
+        // check if message meets length requirements
+        if($length < 2000 && $length > 25) {
+            return $message;
+        } else {
+            return false;
+        }
+    }
 }
