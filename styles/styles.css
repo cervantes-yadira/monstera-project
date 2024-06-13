@@ -170,7 +170,7 @@ body {
     border-spacing: 0 10px;
 }
 
-#table-header {
+#table-header, #outdoor-table-header {
     background-color: var(--tea-green-color);
 }
 

@@ -13,6 +13,7 @@
             <div class="col-8">
                 <table class="table-default">
                     <thead>
+                    <h5>Inside Plants</h5>
                     <tr id="table-header">
                         <th>Name</th>
                         <th>Plant</th>
@@ -21,7 +22,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <repeat group="{{ @plantTest }}" value="{{ @plant }}">
+                    <repeat group="{{ @indoorPlantTest }}" value="{{ @plant }}">
                         <tr>
                             <td>{{ @plant->getPlantName() }}</td>
                             <td>{{ @plant->getSpeciesName() }}</td>
@@ -31,6 +32,34 @@
                                 <form method="POST" action="view">
                                     <label hidden="hidden" for="plant-id"></label>
                                     <input id="plant-id" hidden="hidden" value="{{ @plant->getPlantId() }}" name="plantId">
+                                    <button class="nav-item nav-link" type="submit">view/edit</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </repeat>
+                    </tbody>
+                </table>
+                <table class="table-default">
+                    <thead>
+                    <h5>Outside Plants</h5>
+                    <tr id="outdoor-table-header">
+                        <th>Name</th>
+                        <th>Plant</th>
+                        <th>Location</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <repeat group="{{ @outdoorPlantTest }}" value="{{ @plant }}">
+                        <tr>
+                            <td>{{ @plant->getPlantName() }}</td>
+                            <td>{{ @plant->getSpeciesName() }}</td>
+                            <td>{{ @plant->getLocation() }}</td>
+                            <td>
+                                <!-- allows user to view specific plant -->
+                                <form method="POST" action="view">
+                                    <label hidden="hidden" for="outdoor-plant-id"></label>
+                                    <input id="outdoor-plant-id" hidden="hidden" value="{{ @plant->getPlantId() }}" name="plantId">
                                     <button class="nav-item nav-link" type="submit">view/edit</button>
                                 </form>
                             </td>

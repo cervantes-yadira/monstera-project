@@ -175,7 +175,9 @@ class Controller3
         $user = $this->_f3->get("SESSION.user");
         $plants = $GLOBALS['dataLayer']->getPlantInfo($user);
         $userId = $user->getUserId();
-        $plantObjects = []; // Yadira
+        $indoorPlantObjects = [];
+        $outdoorPlantObjects = [];
+        $plantObjects = [];
 
         // Set today's date
         $today = new DateTime();
@@ -204,6 +206,10 @@ class Controller3
                     $plant['AdoptionDate'],
                     $plantId,
                     $images);
+
+                // Add to indoorPlantObjects array
+                $indoorPlantObjects[] = $plantObject;
+
             }else{
                 $plantObject = new OutdoorPlant(
                     $userId,
@@ -215,9 +221,10 @@ class Controller3
                     $plant['AdoptionDate'],
                     $plantId,
                     $images);
+
+                // Add to plantObjects array
+                $outdoorPlantObjects[] = $plantObject;
             }
-
-
 
             // Add to plantObjects array
             $plantObjects[] = $plantObject;
@@ -248,7 +255,8 @@ class Controller3
 //        print_r($reminderPlant);
 
         // Set plantObjects and reminderPlant to session
-        $this->_f3->set('plantTest', $plantObjects);
+        $this->_f3->set('indoorPlantTest', $indoorPlantObjects);
+        $this->_f3->set('outdoorPlantTest', $outdoorPlantObjects);
         $this->_f3->set('reminderPlant', $reminderPlant);
         $this->_f3->set('SESSION.plants', $plantObjects);
 
@@ -349,9 +357,10 @@ class Controller3
                     $id = $GLOBALS['dataLayer']->addImage($plantImage);
                     $plantImage->setImageId($id);
                 }
+                $this->_f3->reroute('library');
             }
 
-            $this->_f3->reroute('library');
+
 
         }
 
