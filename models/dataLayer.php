@@ -207,21 +207,24 @@ class DataLayer3
         $sql = "UPDATE Plants SET LastWatered = :lastWatered WHERE PlantId = :plantId";
 
         $statement = $this->_dbh->prepare($sql);
-        $todayDate = date('Y-m-d');
+
+        $today = new DateTime();
+        $todayDate = $today->format('Y-m-d');
         $statement->bindParam(":lastWatered", $todayDate);
 
         $plantId = $plant->getPlantId();
-        $statement->bindParam(":plantId", $plantId);
-        $statement->execute();
+        $statement->bindParam(":plantId", $plantId, PDO::PARAM_INT);
 
         $statement->execute();
-        echo "Plant watered successfully";
+
+//        echo "Plant watered successfully";
 
     }
 
     function getPlantInfo($user)
     {
-        $sql = "SELECT PlantId, UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered, isIndoor, Location FROM Plants WHERE UserId = :userId";
+        $sql = "SELECT PlantId, UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered, isIndoor, 
+                Location FROM Plants WHERE UserId = :userId";
 
         $statement = $this->_dbh->prepare($sql);
         $userId = $user->getUserId();

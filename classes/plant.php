@@ -19,7 +19,7 @@ class Plant
      * @param $_plantId
      * @param $_files
      */
-    public function __construct($_memberId, $_plantName, $_speciesName, $_waterPeriod, $_waterDate, $_plantId, $_files)
+    public function __construct($_memberId, $_plantName, $_speciesName, $_waterPeriod, $_waterDate, $_plantId, $_files=null)
     {
         $this->_memberId = $_memberId;
         $this->_plantName = $_plantName;
