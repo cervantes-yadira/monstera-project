@@ -24,6 +24,12 @@ class DataLayer3
         }
     }
 
+    /**
+     * Retrieves user infomation
+     *
+     * @param $userName string username
+     * @return array user info
+     */
     function getUser($userName)
     {
         //1 define
@@ -42,6 +48,12 @@ class DataLayer3
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Insert new user into plantUser table
+     *
+     * @param $user string user
+     * @return array user info
+     */
     function addUser($user)
     {
         //1 define the query
@@ -65,7 +77,12 @@ class DataLayer3
         return $this->_dbh->lastInsertId();
     }
 
-
+    /**
+     * Insert new plant into database to a given user id
+     *
+     * @param $plant array plant info
+     * @return array plant info
+     */
     function addPlant($plant)
     {
         //1 define the query
@@ -106,7 +123,12 @@ class DataLayer3
         return $this->_dbh->lastInsertId();
     }
 
-
+    /**
+     * Insert plant image into database to a given plant id
+     *
+     * @param $image jpg immage uploaded
+     * @return plantid
+     */
     function addImage($image)
     {
         //1 define the query
@@ -221,6 +243,12 @@ class DataLayer3
 
     }
 
+    /**
+     * Retrieves all plant info associated with a given user from the database.
+     *
+     * @param $user string the ID of the user
+     * @return array an array of plant info
+     */
     function getPlantInfo($user)
     {
         $sql = "SELECT PlantId, UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered, isIndoor, 
