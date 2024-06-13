@@ -149,6 +149,7 @@ class Controller3
     {
         if($this->_f3->get("SESSION.user") !== null) {
             $this->_f3->set("SESSION.user", null);
+            session_destroy();
         }
 
         $this->_f3->reroute('/');
