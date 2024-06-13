@@ -90,7 +90,7 @@ body {
 .button, #plantSearch {
     padding: 0.5rem 0.9rem 0.5rem 0.9rem;
     background-color: var(--dark-green-color);
-    border-color: var(--dark-green-color);
+    border: solid 1px var(--dark-green-color);
     color: white;
     text-decoration: none;
     border-radius: 10px;
