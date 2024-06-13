@@ -84,10 +84,10 @@ class DataLayer3
         $waterDate = $plant->getWaterDate();
         $location = "";
         if(get_class($plant) == "OutdoorPlant"){
-            $isIndoor = 0;
+            $isIndoor = 1;
             $location = $plant->getLocation();
         } else {
-            $isIndoor = 1;
+            $isIndoor = 0;
         }
 
         $statement->bindParam(':userId', $userId);
