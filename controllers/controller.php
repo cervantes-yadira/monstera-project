@@ -188,26 +188,42 @@ class Controller3
             // grab images for the plant
             $plantId = $plant['PlantId'];
             $images = $GLOBALS['dataLayer']->getImages($plantId);
+            $isIndoor = $plant['isIndoor'];
 
             // check if a plant has images
             empty($images) ? $images = null : $images = $images[0]["Url"];
 
             // Create plant object
-            $plantObject = new Plant(
-                $userId,
-                $plant['Nickname'],
-                $plant['Species'],
-                $plant['WateringPeriod'],
-                $plant['LastWatered'],
-                $plant['AdoptionDate'],
-                $plantId,
-                $images
-            );
+            if($isIndoor == 0){
+                $plantObject = new IndoorPlant(
+                    $userId,
+                    $plant['Nickname'],
+                    $plant['Species'],
+                    $plant['WateringPeriod'],
+                    $plant['LastWatered'],
+                    $plant['AdoptionDate'],
+                    $plantId,
+                    $images);
+            }else{
+                $plantObject = new OutdoorPlant(
+                    $userId,
+                    $plant['Nickname'],
+                    $plant['Species'],
+                    $plant['WateringPeriod'],
+                    $plant['LastWatered'],
+                    $plant['Location'],
+                    $plant['AdoptionDate'],
+                    $plantId,
+                    $images);
+            }
+
+
 
             // Add to plantObjects array
             $plantObjects[] = $plantObject;
 
             // Calculate next watering date
+
             $lastWateredDate = new DateTime($plant['LastWatered']);
             $nextWateredDate = clone $lastWateredDate;
             $nextWateredDate->modify("+{$plant['WateringPeriod']} days");
@@ -248,7 +264,7 @@ class Controller3
     function addPlant(): void
     {
         // define variables
-        $plantName = $speciesName = $waterPeriod = $lastWatered = $adoptionDate = $imagePath = "";
+        $plantName = $speciesName = $waterPeriod = $lastWatered = $adoptionDate = $imagePath = $location = $isIndoor = "";
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             //handle file upload
 
@@ -287,6 +303,18 @@ class Controller3
             } else {
                 $this->_f3->set('errors["waterPeriod"]', "Please enter a number between 0-99");
             }
+            if(!empty($_POST['location'])){
+                if(Validate3::validName($_POST['location'])){
+                    $location = $_POST['location'];
+                }else {
+                    $this->_f3->set('errors["location"]', "Please enter a valid location (only letters no spaces)");
+                }
+            }
+            if($_POST['isIndoor']== 0 || $_POST['isIndoor']==1){
+                $isIndoor = $_POST['isIndoor'];
+            }else {
+                $this->_f3->set('errors["isIndoor"]', "Please select indoor or outdoor plant type.");
+            }
 
             $lastWatered = $_POST['lastWatered'];
             $adoptionDate = $_POST['adoptionDate'];
@@ -297,10 +325,18 @@ class Controller3
 
             // if no errors call sql add methods
             if (empty($this->_f3->get('errors'))) {
-                $plant = new Plant($memberId, $plantName, $speciesName,
-                    $waterPeriod, $lastWatered, $adoptionDate, "",
-                    $imagePath
-                );
+                if($isIndoor == 0){
+                    $plant = new IndoorPlant($memberId, $plantName, $speciesName,
+                        $waterPeriod, $lastWatered, $adoptionDate, "",
+                        $imagePath
+                    );
+                }else {
+                    $plant = new OutdoorPlant($memberId, $plantName, $speciesName,
+                        $waterPeriod, $lastWatered, $location, $adoptionDate, "",
+                        $imagePath
+                    );
+                }
+
 
                 // add new plant to Plants table
                 $id = $GLOBALS['dataLayer']->addPlant($plant);

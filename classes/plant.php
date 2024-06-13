@@ -7,26 +7,25 @@ class Plant
     private $_speciesName;
     private $_waterPeriod;
     private $_waterDate;
-    private $_adoptDate;
     private $_files;
     private $_plantId;
 
     /**
+     * @param $_memberId
      * @param $_plantName
      * @param $_speciesName
      * @param $_waterPeriod
      * @param $_waterDate
-     * @param $_adoptDate
-     * @param $files
+     * @param $_plantId
+     * @param $_files
      */
-    public function __construct($_memberId, $_plantName, $_speciesName, $_waterPeriod, $_waterDate, $_adoptDate, $_plantId, $_files)
+    public function __construct($_memberId, $_plantName, $_speciesName, $_waterPeriod, $_waterDate, $_plantId, $_files)
     {
         $this->_memberId = $_memberId;
         $this->_plantName = $_plantName;
         $this->_speciesName = $_speciesName;
         $this->_waterPeriod = $_waterPeriod;
         $this->_waterDate = $_waterDate;
-        $this->_adoptDate = $_adoptDate;
         $this->_plantId = $_plantId;
         $this->_files = $_files;
     }

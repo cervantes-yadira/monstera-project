@@ -5,7 +5,7 @@ class DataLayer3
     private $_dbh;
 
     /**
-     * Datalayer contructor to connect to PDO DB
+     * Datalayer constructor to connect to PDO DB
      */
     function __construct()
     {
@@ -69,8 +69,8 @@ class DataLayer3
     function addPlant($plant)
     {
         //1 define the query
-        $sql = 'INSERT INTO Plants (UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered) 
-                VALUES (:userId, :name, :species, :adopt, :waterPeriod, :lastWater)';
+        $sql = 'INSERT INTO Plants (UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered, isIndoor, Location) 
+                VALUES (:userId, :name, :species, :adopt, :waterPeriod, :lastWater, :isIndoor, :location)';
 
         // 2 Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -82,12 +82,22 @@ class DataLayer3
         $adoptDate = $plant->getAdoptDate();
         $waterPeriod = $plant->getWaterPeriod();
         $waterDate = $plant->getWaterDate();
+        $location = "";
+        if(get_class($plant) == "OutdoorPlant"){
+            $isIndoor = 0;
+            $location = $plant->getLocation();
+        } else {
+            $isIndoor = 1;
+        }
+
         $statement->bindParam(':userId', $userId);
         $statement->bindParam(':name', $plantName);
         $statement->bindParam(':species', $species);
         $statement->bindParam(':adopt', $adoptDate);
         $statement->bindParam(':waterPeriod', $waterPeriod);
         $statement->bindParam(':lastWater', $waterDate);
+        $statement->bindParam(':isIndoor', $isIndoor);
+        $statement->bindParam(':location', $location);
 
         //4 execute the query
         $statement->execute();

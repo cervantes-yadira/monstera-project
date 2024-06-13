@@ -20,17 +20,15 @@ This file displays the form for adding a new plant to a user's plant library.
                 <div class="">
                     <div class="row p-3">
                         <!--get plant name-->
-                        <div class="form-group">
+                        <div class="form-group col-6">
                             <label for="plantName" class="control-label">Plant Name</label>
                             <input class="form-control" type="text" name="plantName" id="plantName">
                             <check if="{{ isset(@errors['plantName']) }}">
                                 <p class="text-danger fw-lighter">{{ @errors['plantName'] }}</p>
                             </check>
                         </div>
-                    </div>
-                    <div class="row p-3">
                         <!--get species name-->
-                        <div class="form-group">
+                        <div class="form-group col-6">
                             <label for="speciesName" class="control-label">Species Name</label>
                             <input class="form-control" type="text" name="speciesName" id="speciesName">
                             <check if="{{ isset(@errors['speciesName']) }}">
@@ -40,17 +38,15 @@ This file displays the form for adding a new plant to a user's plant library.
                     </div>
                     <div class="row p-3">
                         <!--get watering period-->
-                        <div class="form-group ">
+                        <div class="form-group col-6">
                             <label for="waterPeriod" class="control-label">Watering Period</label>
                             <input class="form-control" type="number" name="waterPeriod" id="waterPeriod">
                             <check if="{{ isset(@errors['waterPeriod']) }}">
                                 <p class="text-danger fw-lighter">{{ @errors['waterPeriod'] }}</p>
                             </check>
                         </div>
-                    </div>
-                    <div class="row p-3">
                         <!--get last watered date-->
-                        <div class="form-group ">
+                        <div class="form-group col-6">
                             <label for="lastWatered" class="control-label">Date Last Watered</label>
                             <input class="form-control" type="date" name="lastWatered" id="lastWatered">
                             <check if="{{ isset(@errors['lastWatered']) }}">
@@ -60,22 +56,45 @@ This file displays the form for adding a new plant to a user's plant library.
                     </div>
                     <div class="row p-3">
                         <!--get adoption date-->
-                        <div class="form-group ">
+                        <div class="form-group col-6">
                             <label for="adoptionDate" class="control-label">Adoption Date</label>
                             <input class="form-control" type="date" name="adoptionDate" id="adoptionDate">
                             <check if="{{ isset(@errors['adoptionDate']) }}">
                                 <p class="text-danger fw-lighter">{{ @errors['adoptionDate'] }}</p>
                             </check>
                         </div>
+                        <!--get Indoor/Outdoor-->
+                        <div class="form-group col-6">
+                            <label class="form-label">Is Plant Inside or Outside?</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="isIndoor" id="yesIndoor" value="0">
+                                <label class="form-check-label" for="yesIndoor">Inside</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="isIndoor" id="noIndoor" value="1">
+                                <label class="form-check-label" for="noIndoor">Outside</label>
+                            </div>
+                            <check if="{{ isset(@errors['isIndoor']) }}">
+                                <p class="text-danger fw-lighter">{{ @errors['isIndoor'] }}</p>
+                            </check>
+                        </div>
                     </div>
                     <div class="row p-3">
                         <!--get file upload-->
-                        <div class="form-group ">
+                        <div class="form-group col-6">
                             <label for="uploadFile" class="control-label">Add Picture:</label>
                             <input id="max_id" type="hidden" name="MAX_FILE_SIZE" value="100000001" >
                             <input type="file" name="uploadFile" id="uploadFile">
                             <check if="{{ isset(@errors['file']) }}">
                                 <p class="err">{{ @errors['file'] }}</p>
+                            </check>
+                        </div>
+                        <!--get plant location -->
+                        <div class="form-group col-6">
+                            <label for="speciesName" class="control-label">Plant Location</label>
+                            <input class="form-control" type="text" name="location" id="location">
+                            <check if="{{ isset(@errors['location']) }}">
+                                <p class="text-danger fw-lighter">{{ @errors['location'] }}</p>
                             </check>
                         </div>
                     </div>
