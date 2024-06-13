@@ -127,7 +127,7 @@ class Controller3
                     $this->_f3->set('SESSION.user', $user);
 //                    var_dump($user);
 
-                    $this->_f3->reroute('/library');
+                    $this->_f3->reroute('library');
                 } else {
                     $this->_f3->set('errors["logIn"]', "Incorrect username or password, please try again.");
                 }
@@ -189,6 +189,9 @@ class Controller3
             $plantId = $plant['PlantId'];
             $images = $GLOBALS['dataLayer']->getImages($plantId);
 
+            // check if a plant has images
+            empty($images) ? $images = null : $images = $images[0]["Url"];
+
             // Create plant object
             $plantObject = new Plant(
                 $userId,
@@ -198,7 +201,7 @@ class Controller3
                 $plant['LastWatered'],
                 $plant['AdoptionDate'],
                 $plantId,
-                $images[0]["Url"]
+                $images
             );
 
             // Add to plantObjects array
@@ -294,13 +297,14 @@ class Controller3
 
             // if no errors call sql add methods
             if (empty($this->_f3->get('errors'))) {
-                $plant = new Plant($memberId, $plantName, $speciesName, $waterPeriod, $lastWatered, $adoptionDate, "", $imagePath);
+                $plant = new Plant($memberId, $plantName, $speciesName,
+                    $waterPeriod, $lastWatered, $adoptionDate, "",
+                    $imagePath
+                );
 
                 // add new plant to Plants table
                 $id = $GLOBALS['dataLayer']->addPlant($plant);
                 $plant->setPlantId($id);
-
-//                echo "Plant $id inserted successfully"; // delete after testing
 
                 // add new image to PlantPics table
                 if ($imagePath != ''){
@@ -308,10 +312,7 @@ class Controller3
 
                     $id = $GLOBALS['dataLayer']->addImage($plantImage);
                     $plantImage->setImageId($id);
-//                    echo "Image $id inserted successfully"; // delete after testing
                 }
-
-
             }
 
             $this->_f3->reroute('library');
@@ -367,6 +368,9 @@ class Controller3
         $plants = $GLOBALS['dataLayer']->getPlantInfo($user);
         $images = $GLOBALS['dataLayer']->getImages($plantId);
 
+        // check if a plant has images
+        empty($images) ? $images = null : $images = $images[0]["Url"];
+
         $plantObjects = [];
         $reminderPlant = [];
 
@@ -380,7 +384,7 @@ class Controller3
                 $plant['LastWatered'],
                 $plant['AdoptionDate'],
                 $plant['PlantId'],
-                $images[0]["Url"]
+                $images
             );
 
             // Add to plantObjects array
@@ -392,7 +396,8 @@ class Controller3
             $nextWateredDate->modify("+{$plant['WateringPeriod']} days");
             $nextWatered = $nextWateredDate->format('Y-m-d');
 
-            // Only add to reminderPlant array if nextWatered date is today or before today
+            // Only add to reminderPlant array if nextWatered date is today or
+            // before today
             if ($nextWateredDate <= $today) {
                 $reminderPlant[] = [
                     'Nickname' => $plantObject->getPlantName(),

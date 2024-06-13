@@ -12,7 +12,7 @@ This file displays the information and images of a single plant.
         <include href="views/navbar.html"></include>
 
         <div class="view-plant-container">
-            <h3>Your Plant</h3>
+            <h3>{{ @SESSION.plant->getPlantName() }}</h3>
 
             <!-- plant info -->
             <div class="row">
@@ -20,10 +20,6 @@ This file displays the information and images of a single plant.
                     <!-- represented as a table to separate label and info -->
                     <table class="table view-plant-table">
                         <tbody>
-                            <tr>
-                                <td class="fw-bold">Name:</td>
-                                <td>{{ @SESSION.plant->getPlantName() }}</td>
-                            </tr>
                             <tr>
                                 <td class="fw-bold">Species:</td>
                                 <td>{{ @SESSION.plant->getSpeciesName() }}</td>
@@ -34,7 +30,14 @@ This file displays the information and images of a single plant.
                             </tr>
                             <tr>
                                 <td class="fw-bold">Watering Period:</td>
-                                <td>{{ @SESSION.plant->getWaterPeriod() }}</td>
+                                <check if="{{ @SESSION.plant->getWaterPeriod() }} === '1'">
+                                    <true>
+                                        <td>{{ @SESSION.plant->getWaterPeriod() }} day</td>
+                                    </true>
+                                    <false>
+                                        <td>{{ @SESSION.plant->getWaterPeriod() }} days</td>
+                                    </false>
+                                </check>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Last Watered:</td>
@@ -53,9 +56,16 @@ This file displays the information and images of a single plant.
                 <div class="m-4">
                     <!-- evenly spaces all images -->
                     <div class="row mb-4 gx-5">
-                        <div class="col-3">
-                            <img class="gallery-image" alt="Picture of Plant" src="{{ @SESSION.plant->getFiles() }}">
-                        </div>
+                        <check if="{{ @SESSION.plant->getFiles() }}">
+                            <true>
+                                <div class="col-3">
+                                    <img class="gallery-image" alt="Picture of Plant" src="{{ @SESSION.plant->getFiles() }}">
+                                </div>
+                            </true>
+                            <false>
+                                <p>No images available.</p>
+                            </false>
+                        </check>
                     </div>
                 </div>
             </div>
