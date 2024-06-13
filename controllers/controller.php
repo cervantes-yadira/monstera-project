@@ -173,6 +173,10 @@ class Controller3
     function plantLibrary()
     {
         $user = $this->_f3->get("SESSION.user");
+        if ($user == null){
+            $this->_f3->reroute('sign-in');
+        }
+
         $plants = $GLOBALS['dataLayer']->getPlantInfo($user);
         $userId = $user->getUserId();
         $indoorPlantObjects = [];
