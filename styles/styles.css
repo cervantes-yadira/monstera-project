@@ -33,6 +33,7 @@ body {
     width: 100%;
     background-color: var(--sage-green-color);
     box-shadow: 0 3px 7px #b9b9b9;
+    z-index: 1000;
 }
 
 /* font styles */
@@ -193,6 +194,7 @@ body {
 
 .notification-list li:first-child {
     font-weight: bold;
+    z-index: 500;
 }
 
 .notification-list li {
