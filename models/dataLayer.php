@@ -224,7 +224,7 @@ class DataLayer3
     function getPlantInfo($user)
     {
         $sql = "SELECT PlantId, UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered, isIndoor, 
-                Location FROM Plants WHERE UserId = :userId";
+                Location FROM Plants WHERE UserId = :userId ORDER BY Nickname ASC";
 
         $statement = $this->_dbh->prepare($sql);
         $userId = $user->getUserId();

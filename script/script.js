@@ -104,20 +104,11 @@ async function loadPlantInfo(event){
     let otherName = document.querySelector("#other_name");
     otherName.textContent = data.other_name;
 
-    // let wateringSchedule = document.querySelector("#watering");
-    // wateringSchedule.textContent = data.watering;
-
     let wateringBenchmark = document.querySelector("#watering_general_benchmark");
     wateringBenchmark.textContent = data.watering_general_benchmark.value + ' ' + data.watering_general_benchmark.unit;
 
     let sunlight = document.querySelector("#sunlight");
     sunlight.textContent = data.sunlight;
-
-    // let pruningMonth = document.querySelector("#pruning_month");
-    // pruningMonth.textContent = data.pruning_month;
-
-    // let careGuides = document.querySelector("#care-guides");
-    // careGuides.textContent = data.care-guides;
 
     let description = document.querySelector("#description");
     description.textContent = data.description;
