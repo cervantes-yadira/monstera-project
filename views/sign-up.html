@@ -21,8 +21,10 @@ This file is the route for /sign-up, displays the sign up page of our website an
                         <small id="name-error" class="warning ps-1"></small>
                         <div class="row">
                             <div class="col-sm">
+<!--                                <input type="text" id="input-user-name" class="form-control" name="userName" placeholder="Username"-->
+<!--                                       aria-label="Username" maxlength="30">-->
                                 <input type="text" id="input-user-name" class="form-control" name="userName" placeholder="Username"
-                                       aria-label="Username" maxlength="30">
+                                       aria-label="Username">
                                 <check if="{{ isset(@errors['userName']) }}">
                                     <p class="text-danger fw-lighter">{{ @errors['userName'] }}</p>
                                 </check>
@@ -33,7 +35,8 @@ This file is the route for /sign-up, displays the sign up page of our website an
                     <div class="mb-4">
                         <label for="input-email" class="form-label">Email*</label>
                         <small id="email-error" class="warning ps-1"></small>
-                        <input type="email" class="form-control" id="input-email" name="email" placeholder="e.g. example@email.com" maxlength="60">
+<!--                        <input type="email" class="form-control" id="input-email" name="email" placeholder="e.g. example@email.com" maxlength="60">-->
+                        <input type="text" class="form-control" id="input-email" name="email" placeholder="e.g. example@email.com">
                         <check if="{{ isset(@errors['email']) }}">
                             <p class="text-danger fw-lighter">{{ @errors['email'] }}</p>
                         </check>
@@ -42,12 +45,13 @@ This file is the route for /sign-up, displays the sign up page of our website an
                     <div class="row">
                         <div class="col">
                             <label for="input-password" class="form-label">Password*</label>
-                            <input type="password" class="form-control" id="input-password" name="password" minlength="8" maxlength="16">
+<!--                            <input type="password" class="form-control" id="input-password" name="password" minlength="8" maxlength="16">-->
+                            <input type="password" class="form-control" id="input-password" name="password">
                         </div>
                         <div class="col">
                             <label for="input-password-confirm" class="form-label">Re-enter Password*</label>
-                            <input type="password" class="form-control" id="input-password-confirm" name="password-confirm" minlength="8" maxlength="16">
-
+<!--                            <input type="password" class="form-control" id="input-password-confirm" name="password-confirm" minlength="8" maxlength="16">-->
+                            <input type="password" class="form-control" id="input-password-confirm" name="password-confirm">
                         </div>
                         <small id="password-error" class="warning"></small>
                         <check if="{{ isset(@errors['password']) }}">
@@ -67,6 +71,7 @@ This file is the route for /sign-up, displays the sign up page of our website an
 
 <include href="views/footer.html"></include>
 
-<script src="script/validate.js"></script>
+<!-- commented out for testing purposes -->
+<!--<script src="script/validate.js"></script>-->
 </body>
 </html>

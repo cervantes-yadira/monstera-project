@@ -1,26 +1,39 @@
 <?php
+/**
+ * This file contains the PlantImage class.
+ *
+ * @author Jennifer McNiel
+ * @version 1.0
+ */
 
+/**
+ *  Represents a single image of a plant.
+ *
+ * @author Jennifer McNiel
+ * @version 1.0
+ */
 class PlantImage
 {
-    private $_imageId;
-    private $_plantId;
-    private $_path;
+    private $_imageId, $_plantId, $_path;
 
     /**
-     * @param $_imageId
-     * @param $_plantId
-     * @param $_location
+     * Constructs a PlantImage object.
+     *
+     * @param string $_imageId
+     * @param string $_plantId
+     * @param string $_path
      */
-    public function __construct($_imageId, $_plantId, $_location)
+    public function __construct($_imageId, $_plantId, $_path)
     {
         $this->_imageId = $_imageId;
         $this->_plantId = $_plantId;
-        $this->_path = $_location;
+        $this->_path = $_path;
     }
 
-
     /**
-     * @return mixed
+     * Gets an images id.
+     *
+     * @return string an images id
      */
     public function getImageId()
     {
@@ -28,15 +41,19 @@ class PlantImage
     }
 
     /**
-     * @param mixed $imageId
+     * Sets an images id to a given id.
+     *
+     * @param string $imageId a new image id
      */
-    public function setImageId($imageId): void
+    public function setImageId($imageId)
     {
         $this->_imageId = $imageId;
     }
 
     /**
-     * @return mixed
+     * Gets an images plant id.
+     *
+     * @return string an images plant id
      */
     public function getPlantId()
     {
@@ -44,15 +61,19 @@ class PlantImage
     }
 
     /**
-     * @param mixed $plantId
+     * Sets an images associated plant id to a given id.
+     *
+     * @param string $plantId a new plant id
      */
-    public function setPlantId($plantId): void
+    public function setPlantId($plantId)
     {
         $this->_plantId = $plantId;
     }
 
     /**
-     * @return mixed
+     * Returns an images file path.
+     *
+     * @return string an images file path
      */
     public function getPath()
     {
@@ -60,12 +81,12 @@ class PlantImage
     }
 
     /**
-     * @param mixed $location
+     * Sets an images file path to a given path.
+     *
+     * @param string $path a new file path
      */
-    public function setPath($location): void
+    public function setPath($path)
     {
-        $this->_path = $location;
+        $this->_path = $path;
     }
-
-
 }

@@ -20,7 +20,7 @@ This file displays the contact form page and is linked in the footer of every pa
             <div class="mb-3">
                 <label for="input-name" class="form-label">Name:</label>
                 <input id="input-name" name="name" type="text" class="form-control">
-                <small id="name-error" class="text-danger fw-lighter"></small>
+<!--                <small id="name-error" class="text-danger fw-lighter"></small>-->
                 <check if="{{ isset(@errors['name']) }}">
                     <small id="errors-name" class="text-danger fw-lighter">{{ @errors['name'] }}</small>
                 </check>
@@ -29,7 +29,7 @@ This file displays the contact form page and is linked in the footer of every pa
             <div class="mb-3">
                 <label for="input-email" class="form-label">Email:</label>
                 <input id="input-email" name="email" type="text" class="form-control">
-                <small id="email-error" class="text-danger fw-lighter"></small>
+<!--                <small id="email-error" class="text-danger fw-lighter"></small>-->
                 <check if="{{ isset(@errors['email']) }}">
                     <small id="errors-email" class="text-danger fw-lighter">{{ @errors['email'] }}</small>
                 </check>
@@ -37,7 +37,7 @@ This file displays the contact form page and is linked in the footer of every pa
 
             <div class="mb-3">
                 <label for="input-message" class="form-label">Message:</label>
-                <small id="message-error" class="text-danger fw-lighter"></small>
+<!--                <small id="message-error" class="text-danger fw-lighter"></small>-->
                 <check if="{{ isset(@errors['message']) }}">
                     <small id="errors-message" class="text-danger fw-lighter">{{ @errors['message'] }}</small>
                 </check>
@@ -53,6 +53,8 @@ This file displays the contact form page and is linked in the footer of every pa
 
     <!-- includes footer.html -->
     <include href="views/footer.html"></include>
-    <script src="script/validate.js"></script>
+
+    <!-- commented out for testing purposes -->
+    <!--<script src="script/validate.js"></script>-->
 </body>
 </html>

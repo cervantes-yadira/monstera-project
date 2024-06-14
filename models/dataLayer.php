@@ -1,11 +1,27 @@
 <?php
+/**
+ * This file contains the DataLayer3 class.
+ *
+ * @author Jennifer McNiel
+ * @author Luke Cheng
+ * @author Yadira Cervantes
+ * @version 1.0
+ */
 
+/**
+ * Adds, removes, accesses, and updates elements in the database.
+ *
+ * @author Jennifer McNiel
+ * @author Luke Cheng
+ * @author Yadira Cervantes
+ * @version 1.0
+ */
 class DataLayer3
 {
     private $_dbh;
 
     /**
-     * Datalayer constructor to connect to PDO DB
+     * Constructs a DataLayer3 object.
      */
     function __construct()
     {
@@ -14,21 +30,21 @@ class DataLayer3
 
         try {
             // instantiate our PDO DB object
-            $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-//            echo 'Connected to database!!';
-
+            $this->_dbh = new PDO(DB_DSN, DB_USERNAME,
+                DB_PASSWORD
+            );
         }
         catch (PDOException $e) {
-            die ($e->getMessage()); // this prevents the code from continuing to execute // use for development testing
-//            die ("<p>Something went wrong</p>");  // this code protects from showing errors to users
+            // this prevents the code from continuing to execute
+            die ($e->getMessage());
         }
     }
 
     /**
-     * Retrieves user infomation
+     * Gets a specified user from the database.
      *
-     * @param $userName string username
-     * @return array user info
+     * @param mixed $userName a members username
+     * @return mixed query result
      */
     function getUser($userName)
     {
@@ -49,15 +65,16 @@ class DataLayer3
     }
 
     /**
-     * Insert new user into plantUser table
+     * Adds a specified user to the database.
      *
-     * @param $user string user
-     * @return array user info
+     * @param Member $user a Member object
+     * @return false|string false if query failed, a string user id otherwise
      */
     function addUser($user)
     {
         //1 define the query
-        $sql = 'INSERT INTO PlantUsers (UserName, Password, Email) VALUES (:name, :pass, :email)';
+        $sql = 'INSERT INTO PlantUsers (UserName, Password, Email) 
+                    VALUES (:name, :pass, :email)';
 
         // 2 Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -78,16 +95,18 @@ class DataLayer3
     }
 
     /**
-     * Insert new plant into database to a given user id
+     * Adds a specified plant to the database.
      *
-     * @param $plant array plant info
-     * @return array plant info
+     * @param Plant $plant a Plant (or its child) object
+     * @return false|string false if query failed, a string plant id otherwise
      */
     function addPlant($plant)
     {
         //1 define the query
-        $sql = 'INSERT INTO Plants (UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered, isIndoor, Location) 
-                VALUES (:userId, :name, :species, :adopt, :waterPeriod, :lastWater, :isIndoor, :location)';
+        $sql = 'INSERT INTO Plants (UserId, Nickname, Species, AdoptionDate, 
+                    WateringPeriod, LastWatered, isIndoor, Location) 
+                    VALUES (:userId, :name, :species, :adopt, :waterPeriod, 
+                            :lastWater, :isIndoor, :location)';
 
         // 2 Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -96,14 +115,17 @@ class DataLayer3
         $userId = $plant->getMemberId();
         $plantName = $plant->getPlantName();
         $species = $plant->getSpeciesName();
-        $adoptDate = $plant->getAdoptDate();
+        $adoptDate = "";
         $waterPeriod = $plant->getWaterPeriod();
         $waterDate = $plant->getWaterDate();
         $location = "";
-        if(get_class($plant) == "OutdoorPlant"){
+
+        if (get_class($plant) === "Plant_OutdoorPlant") {
             $isIndoor = 1;
             $location = $plant->getLocation();
-        } else {
+            $adoptDate = $plant->getPlantedDate();
+        } elseif (get_class($plant) === "Plant_IndoorPlant") {
+            $adoptDate = $plant->getAdoptDate();
             $isIndoor = 0;
         }
 
@@ -124,10 +146,10 @@ class DataLayer3
     }
 
     /**
-     * Insert plant image into database to a given plant id
+     * Adds a specified plant image to the database.
      *
-     * @param $image jpg immage uploaded
-     * @return plantid
+     * @param PlantImage $image a PlantImage object
+     * @return false|string false if query failed, a string image id otherwise
      */
     function addImage($image)
     {
@@ -147,16 +169,15 @@ class DataLayer3
         //4 execute the query
         $statement->execute();
 
-        //header('Content-Type: application/json');
         //5 (optional) process the results
         return $this->_dbh->lastInsertId();
     }
 
     /**
-     * Retrieves all images associated with a given plant from the database.
+     * Gets all images associated with a given plant from the database.
      *
-     * @param $plantId string the ID of the plant
-     * @return array|false an array of images, or false if an error occurred
+     * @param mixed $plantId a plant id
+     * @return array|false false if query failed, otherwise an array of images
      */
     function getImages(string $plantId)
     {
@@ -174,9 +195,9 @@ class DataLayer3
     }
 
     /**
-     * Retrieves all plants associated with a user from the database.
+     * Gets all plants associated with a user from the database.
      *
-     * @return array|false an array of plants, or false if an error occurred
+     * @return array|false false if query failed, otherwise an array of plants
      */
     function getPlants()
     {
@@ -199,9 +220,9 @@ class DataLayer3
     }
 
     /**
-     * Retrieves a plant associated with a given plant id from the database.
+     * Gets a plant associated with a given plant id from the database.
      *
-     * @return array|false an array of plant data, or false if an error occurred
+     * @return array|false false if query failed, otherwise an array of data
      */
     function getPlant($plantId)
     {
@@ -220,13 +241,15 @@ class DataLayer3
 
 
     /**
-     * Water plant and reset lastWatered date.
+     * Update the last watered date of a given plant in the database.
      *
+     * @param Plant $plant a Plant (or its child) object
      * @return void
      */
     function waterPlant($plant): void
     {
-        $sql = "UPDATE Plants SET LastWatered = :lastWatered WHERE PlantId = :plantId";
+        $sql = "UPDATE Plants SET LastWatered = :lastWatered 
+                    WHERE PlantId = :plantId";
 
         $statement = $this->_dbh->prepare($sql);
 
@@ -238,21 +261,19 @@ class DataLayer3
         $statement->bindParam(":plantId", $plantId, PDO::PARAM_INT);
 
         $statement->execute();
-
-//        echo "Plant watered successfully";
-
     }
 
     /**
-     * Retrieves all plant info associated with a given user from the database.
+     * Get all plants associated with a member in sorted order.
      *
-     * @param $user string the ID of the user
-     * @return array an array of plant info
+     * @param Member $user a Member object
+     * @return array|false false if query failed, otherwise an array of plants
      */
     function getPlantInfo($user)
     {
-        $sql = "SELECT PlantId, UserId, Nickname, Species, AdoptionDate, WateringPeriod, LastWatered, isIndoor, 
-                Location FROM Plants WHERE UserId = :userId ORDER BY Nickname ASC";
+        $sql = "SELECT PlantId, UserId, Nickname, Species, AdoptionDate, 
+                    WateringPeriod, LastWatered, isIndoor, Location FROM Plants 
+                    WHERE UserId = :userId ORDER BY Nickname ASC";
 
         $statement = $this->_dbh->prepare($sql);
         $userId = $user->getUserId();
@@ -261,7 +282,6 @@ class DataLayer3
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
-
     }
 }
 
