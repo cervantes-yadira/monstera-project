@@ -37,7 +37,7 @@ class Validate3
      */
     static function validAvailableUserName($username)
     {
-        $dataLayer = new DataLayer();
+        $dataLayer = new DataLayer3();
         $isTaken = $dataLayer->getUser($username);
 
         if (!$isTaken) {
