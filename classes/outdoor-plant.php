@@ -1,21 +1,50 @@
 <?php
+/**
+ * This file contains the OutdoorPlant class
+ *
+ * @author Jennifer McNiel
+ * @version 1.0
+ */
 
-class OutdoorPlant extends Plant
+/**
+ * Represents an outdoor plant, keeping track of a location and date planted.
+ *
+ * @author Jennifer McNiel
+ * @version 1.0
+ */
+class Plant_OutdoorPlant extends Plant
 {
-    private $_location;
-    private $_plantedDate;
+    private $_location, $_plantedDate;
 
-
-    function __construct($_memberId, $_plantName, $_speciesName, $_waterPeriod, $_waterDate, $_location, $_plantedDate, $_plantId, $_files)
-    {
-        parent::__construct($_memberId, $_plantName, $_speciesName, $_waterPeriod, $_waterDate, $_plantId, $_files);
+    /**
+     * Constructs an OutdoorPlant object.
+     *
+     * @param string $_memberId
+     * @param string $_plantName
+     * @param string $_speciesName
+     * @param string $_waterPeriod
+     * @param string $_waterDate
+     * @param string $_plantedDate
+     * @param string $_plantId
+     * @param string|null $_location
+     * @param string|null $_files
+     */
+    function __construct($_memberId, $_plantName, $_speciesName, $_waterPeriod,
+                         $_waterDate, $_location, $_plantedDate, $_plantId,
+                         $_files
+    ) {
+        parent::__construct($_memberId, $_plantName, $_speciesName,
+            $_waterPeriod, $_waterDate, $_plantId, $_files
+        );
 
         $this->_location = $_location;
         $this->_plantedDate = $_plantedDate;
     }
 
     /**
-     * @return mixed
+     * Returns the location of a plant.
+     *
+     * @return string|null location of a plant
      */
     public function getLocation()
     {
@@ -23,15 +52,19 @@ class OutdoorPlant extends Plant
     }
 
     /**
-     * @param mixed $location
+     * Sets the adoption date of a plant to a given value.
+     *
+     * @param string|null $location location of a plant
      */
-    public function setLocation($location): void
+    public function setLocation($location)
     {
         $this->_location = $location;
     }
 
     /**
-     * @return mixed
+     * Returns the planted date of a plant.
+     *
+     * @return string date a plant was planted
      */
     public function getPlantedDate()
     {
@@ -39,12 +72,12 @@ class OutdoorPlant extends Plant
     }
 
     /**
-     * @param mixed $_plantedDate
+     * Sets the adoption date of a plant to a given value.
+     *
+     * @param string $plantedDate date a plant was planted
      */
-    public function setPlantedDate($_plantedDate): void
+    public function setPlantedDate($plantedDate)
     {
-        $this->_plantedDate = $_plantedDate;
+        $this->_plantedDate = $plantedDate;
     }
-
-
 }

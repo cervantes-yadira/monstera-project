@@ -1,11 +1,15 @@
 <?php
-
 /**
- * Controller class for application project
+ * Controller class for application project.
+ *
+ * @author Luke Cheng
+ * @author Jennifer McNiel
+ * @author Yadira Cervantes
+ * @version 1.0
  */
 
 /**
- * Renders the templates for the application's views.
+ * Renders the templates and performs processing for the application's views.
  *
  * @author Luke Cheng
  * @author Jennifer McNiel
@@ -16,13 +20,19 @@ class Controller3
 {
     private $_f3;
 
+    /**
+     * Constructs a Controller object.
+     *
+     * @param Base $f3 Fat-Free instance
+     */
     function __construct($f3)
     {
         $this->_f3 = $f3;
     }
 
     /**
-     * Renders the home view template.
+     * Renders the home view.
+     *
      * @return void
      */
     function home(): void
@@ -32,32 +42,31 @@ class Controller3
     }
 
     /**
-     * Renders the user sign-up view template.
+     * Renders the sign-up view.
      *
      * @param $dbh
      * @return void
      */
     function signUp($dbh): void
     {
-
         // define variables
         $userName = $email = $password = $passwordConfirm = '';
 
-        if ($_SERVER['REQUEST_METHOD'] == "POST"){
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-            if(Validate3::validUserName($_POST['userName'])){
+            if (Validate3::validUserName($_POST['userName'])) {
                 //if is valid userName then check if in use
                 $resultCheckUser = $GLOBALS['dataLayer']->getUser($_POST['userName']);
-                var_dump($resultCheckUser);
 
-                if(($resultCheckUser) == 0) {
+                if (($resultCheckUser) == 0) {
                     $userName = $_POST['userName'];
-                }else {
+                } else {
                     $this->_f3->set('errors["userName"]', "User name not available");
                 }
             } else {
                 $this->_f3->set('errors["userName"]', "Please enter a valid user name");
             }
+
             if (Validate3::validEmail($_POST['email'])) {
                 $email = $_POST['email'];
             } else {
@@ -65,8 +74,8 @@ class Controller3
                     "Please use this format: email@example.com"
                 );
             }
-            if(Validate3::validPassword($_POST['password'])){
-                if(Validate3::passwordMatch($_POST['password'], $_POST['password-confirm'])){
+            if (Validate3::validPassword($_POST['password'])) {
+                if (Validate3::passwordMatch($_POST['password'], $_POST['password-confirm'])) {
                     $password = $_POST['password'];
                     // hash the valid password
                     $hashPass = password_hash($password, PASSWORD_DEFAULT);
@@ -79,22 +88,17 @@ class Controller3
                 include at least 1 number");
             }
 
-
             // check no errors
-            if (empty($this->_f3->get('errors'))){
+            if (empty($this->_f3->get('errors'))) {
                 $user = new Member($userName, $email, $hashPass);
-                var_dump($user);
-
                 $this->_f3->set('SESSION.user', $user);
 
                 // send new user info to database
                 $id = $GLOBALS['dataLayer']->addUser($user);
                 $user->setUserId($id);
-                echo "User {{ @$id }} inserted successfully"; // delete after testing
 
                 $this->_f3->reroute('/');
             }
-
         }
 
         $view = new Template();
@@ -102,7 +106,7 @@ class Controller3
     }
 
     /**
-     * Renders the user sign-in view template.
+     * Renders the sign-in view.
      *
      * @return void
      */
@@ -147,7 +151,7 @@ class Controller3
      */
     function signOut()
     {
-        if($this->_f3->get("SESSION.user") !== null) {
+        if ($this->_f3->get("SESSION.user") !== null) {
             $this->_f3->set("SESSION.user", null);
             session_destroy();
         }
@@ -174,7 +178,7 @@ class Controller3
     function plantLibrary()
     {
         $user = $this->_f3->get("SESSION.user");
-        if ($user == null){
+        if ($user == null) {
             $this->_f3->reroute('sign-in');
         }
 
@@ -201,8 +205,8 @@ class Controller3
             empty($images) ? $images = null : $images = $images[0]["Url"];
 
             // Create plant object
-            if($isIndoor == 0){
-                $plantObject = new IndoorPlant(
+            if ($isIndoor == "0") {
+                $plantObject = new Plant_IndoorPlant(
                     $userId,
                     $plant['Nickname'],
                     $plant['Species'],
@@ -212,11 +216,11 @@ class Controller3
                     $plantId,
                     $images);
 
-                // Add to indoorPlantObjects array
+                // Add to indoorPlant Objects array
                 $indoorPlantObjects[] = $plantObject;
 
-            }else{
-                $plantObject = new OutdoorPlant(
+            } else {
+                $plantObject = new Plant_OutdoorPlant(
                     $userId,
                     $plant['Nickname'],
                     $plant['Species'],
@@ -253,12 +257,6 @@ class Controller3
             }
         }
 
-        // Debug: Print plantObjects and reminderPlant
-//        echo "plantObjects:<br>";
-//        var_dump($plantObjects);
-//        echo "<br>reminderPlant:<br>";
-//        print_r($reminderPlant);
-
         // Set plantObjects and reminderPlant to session
         $this->_f3->set('indoorPlantTest', $indoorPlantObjects);
         $this->_f3->set('outdoorPlantTest', $outdoorPlantObjects);
@@ -277,55 +275,59 @@ class Controller3
     function addPlant(): void
     {
         // define variables
-        $plantName = $speciesName = $waterPeriod = $lastWatered = $adoptionDate = $imagePath = $location = $isIndoor = "";
+        $plantName = $speciesName = $waterPeriod = $lastWatered = $adoptionDate
+            = $imagePath = $location = $isIndoor = "";
+
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             //handle file upload
 
-            if($_FILES['uploadFile']['size']!=0){
+            if ($_FILES['uploadFile']['size'] != 0) {
                 $target_dir ="uploads/";
                 $target_file = $target_dir . basename($_FILES["uploadFile"]["name"]);
 
-                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
                 //validate image
+                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
                 $uploadOk = Validate3::validFile($_FILES["uploadFile"], $target_file, $imageFileType);
-                if ($uploadOk){
+
+                if ($uploadOk) {
                     if (move_uploaded_file($_FILES["uploadFile"]["tmp_name"], $target_file)) {
                         $imagePath = $target_file;
                     }
-                }else{
+                } else {
                     $this->_f3->set('errors["file"]', "File is not valid.");
                 }
 
             }
 
             //validate all plant Info
-            if (Validate3::validName($_POST['plantName'])){
+            if (Validate3::validName($_POST['plantName'])) {
                 $plantName = $_POST['plantName'];
-            }else {
+            } else {
                 $this->_f3->set('errors["plantName"]', "Please enter a valid name");
             }
-            if(!empty($_POST['speciesName'])){
-                if(Validate3::validName($_POST['speciesName'])){
+
+            if (!empty($_POST['speciesName'])) {
+                if (Validate3::validName($_POST['speciesName'])) {
                     $speciesName = $_POST['speciesName'];
-                }else {
+                } else {
                     $this->_f3->set('errors["speciesName"]', "Please enter a valid name (only letters no spaces)");
                 }
             }
-            if(is_numeric($_POST['waterPeriod']) && strlen($_POST['waterPeriod']) >= 1 && strlen($_POST['waterPeriod']) <= 2){
+            if (is_numeric($_POST['waterPeriod']) && strlen($_POST['waterPeriod']) >= 1 && strlen($_POST['waterPeriod']) <= 2) {
                 $waterPeriod = $_POST['waterPeriod'];
             } else {
                 $this->_f3->set('errors["waterPeriod"]', "Please enter a number between 0-99");
             }
-            if(!empty($_POST['location'])){
-                if(Validate3::validName($_POST['location'])){
+            if (!empty($_POST['location'])) {
+                if (Validate3::validName($_POST['location'])) {
                     $location = $_POST['location'];
-                }else {
+                } else {
                     $this->_f3->set('errors["location"]', "Please enter a valid location (only letters no spaces)");
                 }
             }
-            if($_POST['isIndoor']== 0 || $_POST['isIndoor']==1){
+            if ($_POST['isIndoor'] == "0" || $_POST['isIndoor'] == "1") {
                 $isIndoor = $_POST['isIndoor'];
-            }else {
+            } else {
                 $this->_f3->set('errors["isIndoor"]', "Please select indoor or outdoor plant type.");
             }
 
@@ -335,38 +337,34 @@ class Controller3
             //get member ID out of session data
             $memberId = $this->_f3->get('SESSION.user')->getUserId();
 
-
             // if no errors call sql add methods
             if (empty($this->_f3->get('errors'))) {
-                if($isIndoor == 0){
-                    $plant = new IndoorPlant($memberId, $plantName, $speciesName,
-                        $waterPeriod, $lastWatered, $adoptionDate, "",
-                        $imagePath
+                if ($isIndoor == "0") {
+                    $plant = new Plant_IndoorPlant($memberId, $plantName,
+                        $speciesName, $waterPeriod, $lastWatered, $adoptionDate,
+                        "", $imagePath
                     );
-                }else {
-                    $plant = new OutdoorPlant($memberId, $plantName, $speciesName,
-                        $waterPeriod, $lastWatered, $location, $adoptionDate, "",
-                        $imagePath
+                } else {
+                    $plant = new Plant_OutdoorPlant($memberId, $plantName,
+                        $speciesName, $waterPeriod, $lastWatered, $location,
+                        $adoptionDate, "", $imagePath
                     );
                 }
-
 
                 // add new plant to Plants table
                 $id = $GLOBALS['dataLayer']->addPlant($plant);
                 $plant->setPlantId($id);
 
                 // add new image to PlantPics table
-                if ($imagePath != ''){
+                if ($imagePath != '') {
                     $plantImage = new PlantImage('', $plant->getPlantId(), $imagePath);
 
                     $id = $GLOBALS['dataLayer']->addImage($plantImage);
                     $plantImage->setImageId($id);
                 }
+
                 $this->_f3->reroute('library');
             }
-
-
-
         }
 
         $view = new Template();
@@ -420,13 +418,12 @@ class Controller3
     }
 
     /**
-     * Renders the contact us view template.
+     * Renders the contact us view.
      *
      * @return void
      */
     function contactUs()
     {
-
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             // get form data
             $name = '';
@@ -463,7 +460,7 @@ class Controller3
 
                 $isSent = mail($recipient, $subject, $message);
 
-                if(true) {
+                if (true) {
                     // add form data to session array
                     $this->_f3->set("SESSION.name", $name);
                     $this->_f3->set("SESSION.email", $email);
@@ -479,7 +476,7 @@ class Controller3
     }
 
     /**
-     * Renders the contact receipt view template.
+     * Renders the contact receipt view.
      *
      * @return void
      */

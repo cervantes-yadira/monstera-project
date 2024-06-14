@@ -25,8 +25,16 @@ This file displays the information and images of a single plant.
                                 <td>{{ @SESSION.plant->getSpeciesName() }}</td>
                             </tr>
                             <tr>
-                                <td class="fw-bold">Adoption Date:</td>
-                                <td>{{ @SESSION.plant->getAdoptDate() }}</td>
+                                <check if="{{ get_class(@SESSION.plant) }} === 'Plant_IndoorPlant'">
+                                    <true>
+                                        <td class="fw-bold">Adoption Date:</td>
+                                        <td>{{ @SESSION.plant->getAdoptDate() }}</td>
+                                    </true>
+                                    <false>
+                                        <td class="fw-bold">Planted Date:</td>
+                                        <td>{{ @SESSION.plant->getPlantedDate() }}</td>
+                                    </false>
+                                </check>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Watering Period:</td>

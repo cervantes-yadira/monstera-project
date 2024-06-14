@@ -1,10 +1,17 @@
 <?php
-// turn on error reporting
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+/**
+ * This files asynchronously validates user input.
+ *
+ * @author Yadira Cervantes
+ * @version 1.0
+ */
 
 // require necessary files
 require_once('validate.php');
+
+// turn on error reporting
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 // echoes if username is valid
 if (isset($_POST['username'])) {
@@ -70,5 +77,4 @@ if(isset($_POST['message'])) {
         echo "";
     }
 }
-
 ?>

@@ -1,37 +1,52 @@
 <?php
+/**
+ * This file contains the Parent_Plant class.
+ *
+ * @author Jennifer McNiel
+ * @version 1.0
+ */
 
+/**
+ * Represents a plant, keeping track of its basic information.
+ *
+ * This class serves as a parent class for indoor and outdoor plants.
+ *
+ * @author Jennifer McNiel
+ * @version 1.0
+ */
 class Plant
 {
-    private $_memberId;
-    private $_plantName;
-    private $_speciesName;
-    private $_waterPeriod;
-    private $_waterDate;
-    private $_files;
-    private $_plantId;
+    private $_memberId, $_plantName, $_speciesName, $_waterPeriod, $_waterDate,
+        $_files, $_plantId;
 
     /**
-     * @param $_memberId
-     * @param $_plantName
-     * @param $_speciesName
-     * @param $_waterPeriod
-     * @param $_waterDate
-     * @param $_plantId
-     * @param $_files
+     * Constructs a Parent_Plant object.
+     *
+     * @param string $memberId The member ID associated with the plant.
+     * @param string $plantName The name of the plant.
+     * @param string $speciesName The species name of the plant.
+     * @param string $waterPeriod The watering period of the plant.
+     * @param string $waterDate The last watered date of the plant.
+     * @param string $plantId The plant ID associated with the plant.
+     * @param string|null $files The files/images associated with the plant.
      */
-    public function __construct($_memberId, $_plantName, $_speciesName, $_waterPeriod, $_waterDate, $_plantId, $_files=null)
-    {
-        $this->_memberId = $_memberId;
-        $this->_plantName = $_plantName;
-        $this->_speciesName = $_speciesName;
-        $this->_waterPeriod = $_waterPeriod;
-        $this->_waterDate = $_waterDate;
-        $this->_plantId = $_plantId;
-        $this->_files = $_files;
+    public function __construct($memberId, $plantName, $speciesName,
+                                $waterPeriod, $waterDate, $plantId,
+                                $files = null
+    ) {
+        $this->_memberId = $memberId;
+        $this->_plantName = $plantName;
+        $this->_speciesName = $speciesName;
+        $this->_waterPeriod = $waterPeriod;
+        $this->_waterDate = $waterDate;
+        $this->_plantId = $plantId;
+        $this->_files = $files;
     }
 
     /**
-     * @return mixed
+     * Gets the member ID associated with the plant.
+     *
+     * @return mixed The member ID associated with the plant.
      */
     public function getMemberId()
     {
@@ -39,15 +54,19 @@ class Plant
     }
 
     /**
-     * @param mixed $memberId
+     * Sets the member ID associated with the plant.
+     *
+     * @param mixed $memberId The member ID to set.
      */
-    public function setMemberId($memberId): void
+    public function setMemberId($memberId)
     {
         $this->_memberId = $memberId;
     }
 
     /**
-     * @return mixed
+     * Gets the name of the plant.
+     *
+     * @return mixed The name of the plant.
      */
     public function getPlantName()
     {
@@ -55,15 +74,19 @@ class Plant
     }
 
     /**
-     * @param mixed $plantName
+     * Sets the name of the plant.
+     *
+     * @param mixed $plantName The name to set.
      */
-    public function setPlantName($plantName): void
+    public function setPlantName($plantName)
     {
         $this->_plantName = $plantName;
     }
 
     /**
-     * @return mixed
+     * Gets the species name of the plant.
+     *
+     * @return mixed The species name of the plant.
      */
     public function getSpeciesName()
     {
@@ -71,15 +94,19 @@ class Plant
     }
 
     /**
-     * @param mixed $speciesName
+     * Sets the species name of the plant.
+     *
+     * @param mixed $speciesName The species name to set.
      */
-    public function setSpeciesName($speciesName): void
+    public function setSpeciesName($speciesName)
     {
         $this->_speciesName = $speciesName;
     }
 
     /**
-     * @return mixed
+     * Gets the watering period of the plant.
+     *
+     * @return mixed The watering period of the plant.
      */
     public function getWaterPeriod()
     {
@@ -87,15 +114,19 @@ class Plant
     }
 
     /**
-     * @param mixed $waterPeriod
+     * Sets the watering period of the plant.
+     *
+     * @param mixed $waterPeriod The watering period to set.
      */
-    public function setWaterPeriod($waterPeriod): void
+    public function setWaterPeriod($waterPeriod)
     {
         $this->_waterPeriod = $waterPeriod;
     }
 
     /**
-     * @return mixed
+     * Gets the last watered date of the plant.
+     *
+     * @return mixed The last watered date of the plant.
      */
     public function getWaterDate()
     {
@@ -103,31 +134,19 @@ class Plant
     }
 
     /**
-     * @param mixed $waterDate
+     * Sets the last watered date of the plant.
+     *
+     * @param mixed $waterDate The last watered date to set.
      */
-    public function setWaterDate($waterDate): void
+    public function setWaterDate($waterDate)
     {
         $this->_waterDate = $waterDate;
     }
 
     /**
-     * @return mixed
-     */
-    public function getAdoptDate()
-    {
-        return $this->_adoptDate;
-    }
-
-    /**
-     * @param mixed $adoptDate
-     */
-    public function setAdoptDate($adoptDate): void
-    {
-        $this->_adoptDate = $adoptDate;
-    }
-
-    /**
-     * @return mixed
+     * Gets the files/images associated with the plant.
+     *
+     * @return mixed The files/images associated with the plant.
      */
     public function getFiles()
     {
@@ -135,15 +154,19 @@ class Plant
     }
 
     /**
-     * @param mixed $files
+     * Sets the files/images associated with the plant.
+     *
+     * @param mixed $files The files/images to set.
      */
-    public function setFiles($files): void
+    public function setFiles($files)
     {
         $this->_files = $files;
     }
 
     /**
-     * @return mixed
+     * Gets the plant ID associated with the plant.
+     *
+     * @return mixed The plant ID associated with the plant.
      */
     public function getPlantId()
     {
@@ -151,12 +174,12 @@ class Plant
     }
 
     /**
-     * @param mixed $plantId
+     * Sets the plant ID associated with the plant.
+     *
+     * @param mixed $plantId The plant ID to set.
      */
-    public function setPlantId($plantId): void
+    public function setPlantId($plantId)
     {
         $this->_plantId = $plantId;
     }
-
-
 }

@@ -1,9 +1,9 @@
 /**
- * Authors: Yadira Cervantes
- * File: validate.js
- *
  * This file uses jQuery to asynchronously call the validation methods in
  * validate.php and display corresponding form errors.
+ *
+ * @author Yadira Cervantes
+ * @version 1.0
  */
 
 // loads jQuery

@@ -1,3 +1,10 @@
+/**
+ * This file fetches, processes, and displays the plant api entries.
+ *
+ * @author Luke Cheng
+ * @version 1.0
+ */
+
 window.onload = async() =>
 {
     document.getElementById('plant-search-form').addEventListener('submit', function(event) {
