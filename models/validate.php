@@ -39,12 +39,19 @@ class Validate3
     {
         $dataLayer = new DataLayer3();
         $isTaken = $dataLayer->getUser($username);
+        return !$isTaken;
+    }
 
-        if (!$isTaken) {
-            return true;
-        } else {
-            return false;
-        }
+    /**
+     * Validates watering period by checking if it's a 1-2 digit number.
+     *
+     * @param string $waterPeriod
+     * @return bool true if watering period is valid, false otherwise
+     */
+    static function validWaterPeriod($waterPeriod)
+    {
+        $length = strlen($waterPeriod);
+        return is_numeric($waterPeriod) && $length >= 1 && $length <= 2;
     }
 
     /**
@@ -57,11 +64,7 @@ class Validate3
     {
         $sanEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
 
-        if (!filter_var($sanEmail, FILTER_VALIDATE_EMAIL)) {
-            return false;
-        } else {
-            return true;
-        }
+        return filter_var($sanEmail, FILTER_VALIDATE_EMAIL);
     }
 
     /**
@@ -73,12 +76,7 @@ class Validate3
     static function validPassword(string $password)
     {
         $pattern = '/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d!@#$%&*_\-.]{8,16}$/';
-
-        if (preg_match($pattern, $password)) {
-            return true;
-        } else {
-            return false;
-        }
+        return preg_match($pattern, $password);
     }
 
     /**
@@ -90,11 +88,7 @@ class Validate3
      */
     static function passwordMatch(string $password, string $passwordConfirm)
     {
-        if ($password === $passwordConfirm){
-            return true;
-        } else {
-            return false;
-        }
+        return $password === $passwordConfirm;
     }
 
     /**
