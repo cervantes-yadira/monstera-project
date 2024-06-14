@@ -82,12 +82,12 @@ Luke Cheng - Developer
 </ul>
 
 <h1>UML Class Diagram</h1>
-<img src="images/uml.png" alt="UML diagram">
+<img src="images/uml.png" alt="UML Class diagram">
 
 <h1>ER Database Diagram</h1>
-<img src="images/database.png" alt="Database diagram">
+<img src="images/database.png" alt="ER Database diagram">
 
 <h1>Github Commit breakdown</h1>
-<img src="images/github.png" alt="Github commit">
+<img src="images/github.png" alt="Github commit breakdown">
 
 
