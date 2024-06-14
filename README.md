@@ -80,3 +80,14 @@ Luke Cheng - Developer
 <ul>
     <li>We have learned a lot throughout this quarter about fullstack web development, especially using MVC architecture, PHP, and Git. We have applied these new skills to our project, making it better and improving our understanding of fullstack development.</li>
 </ul>
+
+<h1>UML Class Diagram</h1>
+<img src="images/uml.png" alt="UML diagram">
+
+<h1>ER Database Diagram</h1>
+<img src="images/database.png" alt="Database diagram">
+
+<h1>Github Commit breakdown</h1>
+<img src="images/github.png" alt="Github commit">
+
+
