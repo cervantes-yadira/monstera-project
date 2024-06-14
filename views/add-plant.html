@@ -83,15 +83,15 @@ This file displays the form for adding a new plant to a user's plant library.
                         <!--get file upload-->
                         <div class="form-group col-6">
                             <label for="uploadFile" class="control-label">Add Picture:</label>
-                            <input id="max_id" type="hidden" name="MAX_FILE_SIZE" value="100000001" >
+<!--                            <input id="max_id" type="hidden" name="MAX_FILE_SIZE" value="100000001">-->
                             <input type="file" name="uploadFile" id="uploadFile">
                             <check if="{{ isset(@errors['file']) }}">
-                                <p class="err">{{ @errors['file'] }}</p>
+                                <p class="text-danger fw-lighter">{{ @errors['file'] }}</p>
                             </check>
                         </div>
                         <!--get plant location -->
                         <div class="form-group col-6">
-                            <label for="speciesName" class="control-label">Plant Location</label>
+                            <label for="location" class="control-label">Plant Location</label>
                             <input class="form-control" type="text" name="location" id="location">
                             <check if="{{ isset(@errors['location']) }}">
                                 <p class="text-danger fw-lighter">{{ @errors['location'] }}</p>
